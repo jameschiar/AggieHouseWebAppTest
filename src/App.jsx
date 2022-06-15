@@ -1,28 +1,30 @@
 import React from 'react';
 import './App.css';
 import Login from './pages/Login';
-import logo from '../images/logo.png';
+import Dashboard from './pages/Dashboard';
+import Calendar from './pages/Calendar';
+import Attendance from './pages/Attendance';
+import Todo from './pages/Todo';
+
+import {BrowserRouter, Routes, Route} from "react-router-dom";
+
 
 function App() {
   return (
-    <main>
-      <div id="logo">
-          <div>
-            <h4 class="logo-header">Aggie House</h4>
-            <hr/>
-            <p class="logo-subheader">aggiehousedavis@gmail.com</p>
-          </div>
-        <img class="logo-img" src={logo} width="75px"/>
-        <div id="login">
-          <h4 class="header">Account Log-in</h4>
-          <p class="login-info">Enter your account information to get access to volunteer resources </p> 
-          <hr />
-          <div id="google-login">
-            <button>placeholder for login button</button>
-          </div>
-        </div>
-      </div>
-    </main>
+   <BrowserRouter>
+    <Routes>
+      <Route exact path="/" element={<Login />}>
+      </Route>
+      <Route exact path="/dashboard" element={<Dashboard />}>
+      </Route>
+      <Route exact path="/calendar" element={<Calendar />}>
+      </Route>
+      <Route exact path="/attendance" element={<Attendance />}>
+      </Route>
+      <Route exact path="/todo" element={<Todo />}>
+      </Route>
+    </Routes>
+  </BrowserRouter>
   );
 }
 
