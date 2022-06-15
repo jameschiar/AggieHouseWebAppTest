@@ -1,12 +1,10 @@
 import React from 'react';
-import './App.css';
-import Login from './pages/Login';
+import './Login.css';
 import logo from '../images/logo.png';
 
-function App() {
+function Login() {
   return (
-    <main>
-      <div id="logo">
+    <div id="logo">
           <div>
             <h4 class="logo-header">Aggie House</h4>
             <hr/>
@@ -22,8 +20,7 @@ function App() {
           </div>
         </div>
       </div>
-    </main>
   );
-}
+};
 
-export default App;
+export default Login;
