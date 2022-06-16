@@ -1,9 +1,12 @@
 import React from 'react';
+import NavBar from "../components/NavBar.jsx"
 
 function Attendance() {
   return (
     <main>
-      <h2>Attendance</h2>
+      <NavBar/>
+      
+      <h2>attendance</h2>
     </main>
   );
 }

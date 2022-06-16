@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
-import Calendar from './pages/Calendar';
+import ShowCalendar from './pages/Calendar';
 import Attendance from './pages/Attendance';
 import Todo from './pages/Todo';
 
@@ -17,7 +17,7 @@ function App() {
       </Route>
       <Route exact path="/dashboard" element={<Dashboard />}>
       </Route>
-      <Route exact path="/calendar" element={<Calendar />}>
+      <Route exact path="/calendar" element={<ShowCalendar />}>
       </Route>
       <Route exact path="/attendance" element={<Attendance />}>
       </Route>

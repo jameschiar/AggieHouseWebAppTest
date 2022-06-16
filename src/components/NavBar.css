@@ -1,0 +1,49 @@
+#navbar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color:#FAF9F8;
+}
+
+img#logo {
+  width: 50px;
+  height: 50px;
+  margin: 15px 10px 10px 10px;
+}
+
+.nav-links {
+  font-size: 25px;
+  font-weight: 300;
+  background-color: #E8E2DC;
+  color: #545454;
+  width: 250px;
+  height: 50px;
+  border-radius: 7.5px;
+  border: none;
+}
+
+.nav-links:hover {
+  opacity: 0.8;
+}
+
+.nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  width: 1000px;
+}
+
+.account {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding-right: 20px;
+}
+
+.account > h2 {
+  font-size: 25px;
+  font-weight: 300;
+  color: #545454;
+  margin-left: 15px;
+}
