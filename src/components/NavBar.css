@@ -41,9 +41,25 @@ img#logo {
   padding-right: 20px;
 }
 
-.account > h2 {
+.account > a {
+  margin-left: 15px;
+  font-family: poppins;
   font-size: 25px;
   font-weight: 300;
+}
+
+.account > a:link{
+  text-decoration: none;
   color: #545454;
-  margin-left: 15px;
+}
+
+.account > a:visited{
+  color: #545454;
+}
+
+#pfp {
+  margin-top: 10px;
+  width:50px;
+  height:50px;
+  border-radius:25px;
 }

@@ -1,0 +1,73 @@
+main {
+  background-color: #E8E2DC;
+}
+
+.attendance-sheet {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: auto;
+  height: auto;
+  margin: 30px;
+  background-color: #BBAB9D;
+  font-family: poppins;
+}
+
+table {
+  width: 1500px;
+  margin-left: 60px;
+  minHeight: 2000px;
+}
+
+th{
+  height: 50px;
+  font-size: 25px;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  color: #545454;
+  font-weight: 450;
+  font-family: poppins;
+}
+
+td{
+  text-align: center;
+  height: 40px;
+  color: #545454;
+  font-weight: 450;
+  font-family: poppins;
+  border: none;
+  background-color: #FAF9F8;
+}
+
+{/*below this is old stuff but keeping it here for now in case the table method doesnt work out*/}
+
+#attendance-sheet-old {
+  display: flex;
+  flex-direction: column;
+  width: auto;
+  height: auto;
+  margin: 30px;
+  background-color: #BBAB9D;
+  font-family: poppins;
+}
+
+#column-header{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.column-header-text {
+  font-size: 25px;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  color: #545454;
+  font-weight: 450;
+}
+
+#columns{
+  width: auto;
+  height: 600px;
+  margin-left: 60px;
+  background-color: #FAF9F8;
+}

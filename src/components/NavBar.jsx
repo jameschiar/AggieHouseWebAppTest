@@ -1,21 +1,28 @@
 import React from 'react';
-import accountImg from "../images/accountpic.png"
-import logo from "../images/logo.svg"
-import "./NavBar.css"
+import logo from "../images/logo.svg";
+import "./NavBar.css";
 import { Link } from 'react-router-dom';
+import {useContext} from 'react';
+import {userContext} from '../context/userContext.js';
+
 
 function NavBar() {
+  
+  const user = useContext(userContext);
+  
   return (
     <div id="navbar">
       <Link to="/dashboard"><img src={logo} id="logo"/></Link>
-      <div class="nav">
-        <p><Link to="/calendar"> <button class="nav-links">Calendar </button></Link></p>
-        <p><Link to="/attendance"> <button class="nav-links">Attendance </button></Link></p>
-        <p><Link to="/todo"> <button class="nav-links">To-Do </button> </Link></p>
-      </div>
-      <div class="account">
-        <img src={accountImg} width="40px" height="40px" />
-        <h2> Christopher Columbus</h2>
+      
+        <div className="nav">
+          <p><Link to="/calendar"> <button className="nav-links">Calendar </button></Link></p>
+          <p><Link to="/attendance"> <button className="nav-links">Attendance </button></Link></p>
+          <p><Link to="/todo"> <button className="nav-links">To-Do </button> </Link></p>
+        </div>
+      
+      <div className="account">
+        <Link to="/account"><img id="pfp" src={user.photoURL} /></Link>
+        <Link to="/account">{user.displayName} </Link>
       </div>
     </div>
   );

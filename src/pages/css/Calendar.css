@@ -1,0 +1,16 @@
+.calendar-container {
+  background-color: white;
+  height: 400pt;
+  padding: 20px;
+  width: auto;
+  margin: 10%;
+  margin-top: 10px;
+}
+
+.calendar-header{
+  font-family: poppins;
+  font-weight: 450;
+  color: #545454;
+  text-align: center;
+  margin-top: 50px;
+}
