@@ -66,8 +66,8 @@ function showCalendar() {
   return (
       <div>
         <NavBar/>
-        <h1 class="calendar-header"> Calendar </h1>
-        <div class="calendar-container">
+        <h1 className="calendar-header"> Calendar </h1>
+        <div className="calendar-container">
           <DragandDropCalendar
             style={{backgroundColor: '#FAF9F9'}}
             localizer={localizer}

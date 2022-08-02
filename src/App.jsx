@@ -60,9 +60,7 @@ function App() {
             await setDoc(doc(db, "users", user.uid), {
               displayName: user.displayName,
               email: user.email,
-              phoneNumber: null,
               photoURL: user.photoURL,
-              pronouns: null
             });
           }
           catch (e) { console.log(e); }

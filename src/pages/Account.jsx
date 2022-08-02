@@ -26,7 +26,7 @@ function Account() {
     getDoc(userDocRef).then((data) => {
       setUserData(data.data());
     });
-  }, [])
+  }, [showPronounForm, showNumberForm]);
   
   
   const updatePronouns = async () => {
