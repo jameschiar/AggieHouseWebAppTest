@@ -1,19 +1,22 @@
 // wrap this component around pages that require a user to be logged in
 
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { useLocation, Navigate, Outlet } from "react-router-dom";
 import { auth } from "../firebase-config";
 import { onAuthStateChanged } from "firebase/auth";
 import Loading from "../pages/Loading";
-import { useEffect } from "react";
+
+import UserContext from "../context/UserProvider";
 
 const RequireAuth = () => {
   const location = useLocation();
   const [userState, setUserState] = useState("unknown");
+  const { setUser } = useContext(UserContext); // current user from auth
 
   useEffect(() => {
     onAuthStateChanged(auth, (currentUser) => {
       if (currentUser) {
+        setUser(currentUser);
         setUserState("true");
       } else {
         setUserState("false");
