@@ -1,9 +1,7 @@
 import React from "react";
-import { useContext } from "react";
 import "./css/Login.css";
 import logo from "../images/logo.png";
 import { Link } from "react-router-dom";
-import UserContext from "../context/UserProvider";
 
 // firebase login
 import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
@@ -15,8 +13,6 @@ import { db } from "../firebase-config.js";
 import { getDoc, setDoc, doc } from "firebase/firestore";
 
 function Login() {
-  const { user, setUser } = useContext(UserContext);
-
   const provider = new GoogleAuthProvider();
 
   const signInWithGoogle = () => {
@@ -65,16 +61,15 @@ function Login() {
         </div>
         <img className="logo-img" src={logo} width="75px" />
       </div>
-      <div id="login">
+      <div id="login-div">
         <h4 className="header">Account Log-in</h4>
         <p className="login-info">
           Enter your account information to get access to volunteer resources{" "}
         </p>
         <hr />
-        <div className="google-login-button" onClick={signInWithGoogle}>
-          Login
-        </div>
-        <Link to="/dashboard"> Link to access other pages </Link>
+        <button className="google-login-button" onClick={signInWithGoogle}>
+          Sign in with Google
+        </button>
       </div>
     </main>
   );
