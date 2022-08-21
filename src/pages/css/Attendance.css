@@ -15,8 +15,8 @@ main {
 
 table {
   width: 1500px;
-  margin-left: 60px;
-  minHeight: 2000px;
+  margin-left: 40px;
+  table-layout: auto;
 }
 
 th{
@@ -37,6 +37,18 @@ td{
   font-family: poppins;
   border: none;
   background-color: #FAF9F8;
+}
+
+.table-button {
+  font-weight: bolder;
+  background-color: #FAF9F8;
+  width: 40px;
+  height: 40px;
+  margin: 10px 0px 10px 0px;
+}
+
+.table-button:hover {
+  background-color: #545454;
 }
 
 {/*below this is old stuff but keeping it here for now in case the table method doesnt work out*/}

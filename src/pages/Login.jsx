@@ -1,7 +1,7 @@
 import React from "react";
 import "./css/Login.css";
 import logo from "../images/logo.png";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 // firebase login
 import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
@@ -14,6 +14,7 @@ import { getDoc, setDoc, doc } from "firebase/firestore";
 
 function Login() {
   const provider = new GoogleAuthProvider();
+  const navigate = useNavigate();
 
   const signInWithGoogle = () => {
     signInWithPopup(auth, provider)
@@ -45,6 +46,7 @@ function Login() {
             console.log("adding user");
           }
         });
+        navigate("/dashboard");
       })
       .catch((error) => {
         console.log(error);

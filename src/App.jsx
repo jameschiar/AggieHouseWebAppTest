@@ -8,7 +8,7 @@ import { onAuthStateChanged, signOut } from "firebase/auth";
 
 // firestore database
 import { db } from "./firebase-config.js";
-import { collection, getDocs, setDoc, addDoc, doc } from "firebase/firestore";
+import { collection, getDocs, doc } from "firebase/firestore";
 
 // import contexts
 import UserContext from "./context/UserProvider";

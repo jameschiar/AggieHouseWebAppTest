@@ -9,8 +9,8 @@ import UserContext from "../context/UserProvider.jsx";
 // firestore
 import { db } from "../firebase-config.js";
 import { getDoc, updateDoc, doc } from "firebase/firestore";
-import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../firebase-config";
+import { signOut } from "firebase/auth";
 
 function Account() {
   const [userData, setUserData] = useState({});
@@ -41,70 +41,94 @@ function Account() {
     toggleNumberForm(!showNumberForm);
   };
 
+  const logoutGoogle = () => {
+    signOut(auth)
+      .then(() => {
+        console.log("signout success");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   return (
     <main>
       <NavBar />
-      <div className="container">
-        <div className="account-container">
-          <div className="profile-picture">
-            <img src={user.photoURL} width="350px" height="350px" />
+      <div style={{ display: "flex", justifyContent: "center" }}>
+        <div className="container">
+          <div className="account-container">
+            <div className="profile-picture">
+              <img
+                src={user.photoURL}
+                referrerPolicy="no-referrer"
+                width="350px"
+                height="350px"
+              />
+            </div>
+            <div className="account-info">
+              <div>
+                <p> Name: {user.displayName} </p>
+              </div>
+              <div>
+                <p>Pronouns: {userData.pronouns}</p>
+                {!showPronounForm && (
+                  <button
+                    onClick={() => {
+                      togglePronounForm(!showPronounForm);
+                    }}
+                  >
+                    Change Pronouns
+                  </button>
+                )}
+                {showPronounForm && (
+                  <input
+                    placeholder="Pronouns"
+                    onChange={(event) => {
+                      setPronoun(event.target.value);
+                    }}
+                  />
+                )}
+                {showPronounForm && (
+                  <button onClick={updatePronouns}>Submit</button>
+                )}
+              </div>
+              <div>
+                <p>Number: {userData.phoneNumber}</p>
+                {!showNumberForm && (
+                  <button
+                    onClick={() => {
+                      toggleNumberForm(!showNumberForm);
+                    }}
+                  >
+                    Change Number
+                  </button>
+                )}
+                {showNumberForm && (
+                  <input
+                    placeholder="e.g. +11231231234"
+                    type="tel"
+                    onChange={(event) => {
+                      setNumber(event.target.value);
+                    }}
+                  />
+                )}
+                {showNumberForm && (
+                  <button onClick={updateNumber}>Submit</button>
+                )}
+              </div>
+              <div>
+                <p>Email: {user.email}</p>
+              </div>
+            </div>
           </div>
-          <div className="account-info">
-            <p> Name: {user.displayName} </p>
-            <p>
-              {" "}
-              Pronouns: {userData.pronouns}
-              {!showPronounForm && (
-                <button
-                  onClick={() => {
-                    togglePronounForm(!showPronounForm);
-                  }}
-                >
-                  Change Pronouns
-                </button>
-              )}
-              {showPronounForm && (
-                <input
-                  placeholder="Pronouns"
-                  onChange={(event) => {
-                    setPronoun(event.target.value);
-                  }}
-                />
-              )}
-              {showPronounForm && (
-                <button onClick={updatePronouns}>Submit</button>
-              )}
-            </p>
-            <p>
-              {" "}
-              Number: {userData.phoneNumber}
-              {!showNumberForm && (
-                <button
-                  onClick={() => {
-                    toggleNumberForm(!showNumberForm);
-                  }}
-                >
-                  Change Number
-                </button>
-              )}
-              {showNumberForm && (
-                <input
-                  placeholder="Number"
-                  type="tel"
-                  onChange={(event) => {
-                    setNumber(event.target.value);
-                  }}
-                />
-              )}
-              {showNumberForm && <button onClick={updateNumber}>Submit</button>}
-            </p>
-            <p> Email: {user.email} </p>
+          <div className="upcoming-shifts">
+            <p>upcoming shifts:</p>
           </div>
-        </div>
-        <div className="upcoming-shifts">
-          <p>upcoming shifts:</p>
         </div>
       </div>
+      <button id="logout" onClick={logoutGoogle}>
+        logout
+      </button>
     </main>
   );
 }

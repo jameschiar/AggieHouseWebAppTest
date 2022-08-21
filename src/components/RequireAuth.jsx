@@ -8,10 +8,10 @@ import Loading from "../pages/Loading";
 
 import UserContext from "../context/UserProvider";
 
-const RequireAuth = () => {
+const RequireAuth = ({ allowedRoles }) => {
   const location = useLocation();
   const [userState, setUserState] = useState("unknown");
-  const { setUser } = useContext(UserContext); // current user from auth
+  const { user, setUser } = useContext(UserContext); // current user from auth
 
   useEffect(() => {
     onAuthStateChanged(auth, (currentUser) => {

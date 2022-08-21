@@ -35,7 +35,7 @@ function Dashboard() {
       <NavBar />
 
       <div id="dash">
-        <h2 className="greeting">Hello {user.displayName},</h2>
+        <h2 className="greeting">Hello {user.displayName}</h2>
         <h3 className="modules">
           Upcoming Shift
           {upcomingShift && (

@@ -37,7 +37,7 @@ function NavBar() {
 
       <div className="account">
         <Link to="/account">
-          <img id="pfp" src={user.photoURL} />
+          <img id="pfp" src={user.photoURL} referrerPolicy="no-referrer" />
         </Link>
         <Link to="/account">{user.displayName} </Link>
       </div>
