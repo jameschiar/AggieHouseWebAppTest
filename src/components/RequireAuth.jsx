@@ -1,38 +1,35 @@
 // wrap this component around pages that require a user to be logged in
 
-import React, { useState, useContext, useEffect } from "react";
+import React from "react";
 import { useLocation, Navigate, Outlet } from "react-router-dom";
-import { auth } from "../firebase-config";
-import { onAuthStateChanged } from "firebase/auth";
-import Loading from "../pages/Loading";
 
-import UserContext from "../context/UserProvider";
+import { useUser } from "../context/UserProvider";
 
 const RequireAuth = ({ allowedRoles }) => {
   const location = useLocation();
-  const [userState, setUserState] = useState("unknown");
-  const { user, setUser } = useContext(UserContext); // current user from auth
+  const { user, userFirebaseData } = useUser(); // current user from auth
 
-  useEffect(() => {
-    onAuthStateChanged(auth, (currentUser) => {
-      if (currentUser) {
-        setUser(currentUser);
-        setUserState("true");
-      } else {
-        setUserState("false");
-      }
-    });
-  }, []);
+  const isEmpty = (obj) => {
+    return Object.keys(obj).length === 0;
+  };
+
+  // the user can access pages based on their role
+  const isAuthorized = () => {
+    return userFirebaseData?.roles?.find((role) =>
+      allowedRoles?.includes(role)
+    );
+  };
 
   // if user is authenticated, display private pages
   // else navigate to login page
-  if (userState === "unknown") {
-    return <Loading />;
-  } else if (userState === "true") {
-    return <Outlet />;
-  } else {
-    return <Navigate to="/login" state={{ from: location }} replace />;
-  }
+
+  return isAuthorized() ? (
+    <Outlet />
+  ) : user && !isEmpty(user) ? (
+    <Navigate to="/unauthorized" state={{ from: location }} replace />
+  ) : (
+    <Navigate to="/login" state={{ from: location }} replace />
+  );
 };
 
 export default RequireAuth;

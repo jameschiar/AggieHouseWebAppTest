@@ -2,11 +2,10 @@ import React from "react";
 import logo from "../images/logo.svg";
 import "./NavBar.css";
 import { Link } from "react-router-dom";
-import { useContext } from "react";
-import UserContext from "../context/UserProvider.jsx";
+import { useUser } from "../context/UserProvider.jsx";
 
 function NavBar() {
-  const { user } = useContext(UserContext);
+  const { user } = useUser();
 
   return (
     <div id="navbar">
@@ -17,19 +16,16 @@ function NavBar() {
       <div className="nav">
         <p>
           <Link to="/calendar">
-            {" "}
             <button className="nav-links">Calendar </button>
           </Link>
         </p>
         <p>
           <Link to="/attendance">
-            {" "}
             <button className="nav-links">Attendance </button>
           </Link>
         </p>
         <p>
           <Link to="/todo">
-            {" "}
             <button className="nav-links">To-Do </button>{" "}
           </Link>
         </p>

@@ -4,11 +4,10 @@ import NavBar from "../components/NavBar.jsx";
 import { Link } from "react-router-dom";
 import events from "../data/events";
 import moment from "moment";
-import { useContext } from "react";
-import UserContext from "../context/UserProvider.jsx";
+import { useUser } from "../context/UserProvider.jsx";
 
 function Dashboard() {
-  const { user } = useContext(UserContext);
+  const { user } = useUser();
 
   const DATE_OPTIONS = {
     weekday: "short",

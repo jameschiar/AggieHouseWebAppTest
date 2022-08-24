@@ -3,52 +3,45 @@ import { useState, useEffect } from "react";
 import NavBar from "../components/NavBar.jsx";
 import "./css/Account.css";
 
-import { useContext } from "react";
-import UserContext from "../context/UserProvider.jsx";
+import { useUser } from "../context/UserProvider.jsx";
 
 // firestore
 import { db } from "../firebase-config.js";
-import { getDoc, updateDoc, doc } from "firebase/firestore";
-import { auth } from "../firebase-config";
-import { signOut } from "firebase/auth";
+import { updateDoc, doc, onSnapshot } from "firebase/firestore";
+
+import { useNavigate } from "react-router-dom";
 
 function Account() {
-  const [userData, setUserData] = useState({});
   const [pronoun, setPronoun] = useState("");
   const [number, setNumber] = useState();
   const [showPronounForm, togglePronounForm] = useState(false);
   const [showNumberForm, toggleNumberForm] = useState(false);
 
-  const { user } = useContext(UserContext); // user from auth
-  const userDocRef = doc(db, "users", user.uid);
+  const { user, userFirebaseData, setUserFirebaseData, logoutGoogle } =
+    useUser(); // user from auth
+  const userDocRef = doc(db, "users", user?.uid);
+  const navigate = useNavigate();
 
   useEffect(() => {
     // get data fields of current user
-    getDoc(userDocRef).then((data) => {
-      setUserData(data.data());
+    const unsub = onSnapshot(userDocRef, (doc) => {
+      setUserFirebaseData(doc.data());
     });
-  }, [showPronounForm, showNumberForm]);
+    return () => {
+      unsub();
+    };
+  }, []);
 
   const updatePronouns = async () => {
+    togglePronounForm(false);
     const newFields = { pronouns: pronoun };
     await updateDoc(userDocRef, newFields);
-    togglePronounForm(false);
   };
 
   const updateNumber = async () => {
+    toggleNumberForm(!showNumberForm);
     const newFields = { phoneNumber: number };
     await updateDoc(userDocRef, newFields);
-    toggleNumberForm(!showNumberForm);
-  };
-
-  const logoutGoogle = () => {
-    signOut(auth)
-      .then(() => {
-        console.log("signout success");
-      })
-      .catch((error) => {
-        console.log(error);
-      });
   };
 
   return (
@@ -70,7 +63,7 @@ function Account() {
                 <p> Name: {user.displayName} </p>
               </div>
               <div>
-                <p>Pronouns: {userData.pronouns}</p>
+                <p>Pronouns: {userFirebaseData.pronouns}</p>
                 {!showPronounForm && (
                   <button
                     onClick={() => {
@@ -93,7 +86,7 @@ function Account() {
                 )}
               </div>
               <div>
-                <p>Number: {userData.phoneNumber}</p>
+                <p>Number: {userFirebaseData.phoneNumber}</p>
                 {!showNumberForm && (
                   <button
                     onClick={() => {
@@ -126,7 +119,13 @@ function Account() {
           </div>
         </div>
       </div>
-      <button id="logout" onClick={logoutGoogle}>
+      <button
+        id="logout"
+        onClick={() => {
+          logoutGoogle();
+          navigate("/login");
+        }}
+      >
         logout
       </button>
     </main>

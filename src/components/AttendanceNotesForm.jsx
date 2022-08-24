@@ -1,10 +1,14 @@
 import React from "react";
 import { useState } from "react";
-import editButton from "../images/pencil-edit-button.svg";
+
+// firestore
 import { doc, updateDoc } from "@firebase/firestore";
 import { db } from "../firebase-config";
 
-export const NotesForm = ({ val }) => {
+// images
+import editButton from "../images/pencil-edit-button.svg";
+
+export const AttendanceNotesForm = ({ val }) => {
   const [notes, setNotes] = useState("");
   const [noteForm, toggleNoteForm] = useState(false);
 

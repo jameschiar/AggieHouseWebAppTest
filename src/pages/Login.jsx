@@ -1,58 +1,10 @@
 import React from "react";
 import "./css/Login.css";
 import logo from "../images/logo.png";
-import { useNavigate } from "react-router-dom";
-
-// firebase login
-import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
-import { auth } from "../firebase-config";
-
-// db
-// firestore database
-import { db } from "../firebase-config.js";
-import { getDoc, setDoc, doc } from "firebase/firestore";
+import { useUser } from "../context/UserProvider";
 
 function Login() {
-  const provider = new GoogleAuthProvider();
-  const navigate = useNavigate();
-
-  const signInWithGoogle = () => {
-    signInWithPopup(auth, provider)
-      .then((result) => {
-        // This gives you a Google Access Token. You can use it to access the Google API.
-        const credential = GoogleAuthProvider.credentialFromResult(result);
-        const token = credential.accessToken;
-        // The signed-in user info.
-        const user = result.user;
-
-        // adds user to firestore database in collection "users"
-        const addUser = async () => {
-          try {
-            await setDoc(doc(db, "users", user.uid), {
-              displayName: user.displayName,
-              email: user.email,
-              photoURL: user.photoURL,
-            });
-          } catch (e) {
-            console.log(e);
-          }
-        };
-
-        // check if user already exists in database
-        const usersRef = doc(db, "users", user.uid);
-        getDoc(usersRef).then((docSnapshot) => {
-          if (!docSnapshot.exists()) {
-            addUser();
-            console.log("adding user");
-          }
-        });
-        navigate("/dashboard");
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-
+  const { signInWithGoogle } = useUser();
   return (
     <main>
       <div id="logo">

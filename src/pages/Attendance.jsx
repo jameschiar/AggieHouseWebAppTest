@@ -51,12 +51,10 @@ function Attendance() {
 
     // set up fields to add to attendance collection
     const fields = {
-      excusedAbsence: false,
       familyName: residentFamilyName,
       givenName: residentGivenName,
       notes: "",
-      present: false,
-      unexcusedAbsence: false,
+      presence: "present",
     };
 
     await addDoc(collection(db, "attendance"), fields);
@@ -67,12 +65,16 @@ function Attendance() {
     setShowResidentForm(false);
   };
 
+  const cancelForm = () => {
+    setShowResidentForm(false);
+    setResidentFamilyName("");
+    setResidentGivenName("");
+  };
+
   return (
     <div>
       <NavBar />
-      {isBusy ? (
-        <Loading />
-      ) : (
+      {!isBusy && (
         <div>
           <AttendanceTable
             attendanceData={attendanceData}
@@ -107,10 +109,14 @@ function Attendance() {
                 setResidentFamilyName(e.target.value);
               }}
             />
-            <input type="submit" />
+            <div style={{ display: "flex" }}>
+              <input type="submit" />
+              <button onClick={cancelForm}>Cancel</button>
+            </div>
           </form>
         )}
         <button
+          style={{ marginTop: "10px" }}
           onClick={() => {
             toggleDeleteState(!deleteState);
           }}
