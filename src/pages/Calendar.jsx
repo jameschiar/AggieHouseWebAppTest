@@ -1,97 +1,149 @@
-import React, { useState, useCallback } from "react";
-import NavBar from "../components/NavBar.jsx";
-import { Calendar, Views, momentLocalizer } from "react-big-calendar";
-import moment from "moment";
-import withDragAndDrop from "react-big-calendar/lib/addons/dragAndDrop";
+import React, {useState, useCallback, useEffect} from 'react';
+import NavBar from '../components/NavBar.jsx';
 
-import "react-big-calendar/lib/css/react-big-calendar.css";
-import "react-big-calendar/lib/addons/dragAndDrop/styles.css";
-import "./css/Calendar.css";
+import { db } from '../firebase-config.js';
+import { collection, doc, updateDoc, getDocs, addDoc, onSnapshot, deleteDoc } from 'firebase/firestore';
 
-import events from "../data/events";
+import { Calendar, Views, momentLocalizer } from 'react-big-calendar';
+import moment from 'moment';
+import withDragAndDrop from 'react-big-calendar/lib/addons/dragAndDrop';
+
+import 'react-big-calendar/lib/css/react-big-calendar.css';
+import'react-big-calendar/lib/addons/dragAndDrop/styles.css';
+import './css/Calendar.css';
+
+import events from '../data/events';
 
 const localizer = momentLocalizer(moment);
-const DragandDropCalendar = withDragAndDrop(Calendar);
+const DragandDropCalendar = withDragAndDrop(Calendar)
+
+/*
+  TODO:
+
+  - autoScroll to the Modal
+  
+*/
 
 function showCalendar() {
-  const [myEvents, setEvents] = useState(events);
+  const [modalState, setModalState] = useState(false);
+  const [selectedEvent, setSelectedEvent] = useState(undefined);
+  const [myEvents, setEvents] = useState([]);
+  const eventsCollectionRef = collection(db, "events");
 
+  useEffect(() => {
+
+    const getEvents = async () => {
+      onSnapshot(eventsCollectionRef, (collection) => {
+        setEvents(collection.docs.map((doc) => ({id: doc.id, title: doc.data().title, start: doc.data().start.toDate(), end: doc.data().end.toDate() })));
+      })
+    }
+    getEvents();
+    
+  },[]);
+
+  const shiftSelection = (events) => {
+    setSelectedEvent(events)
+    setModalState(true)
+  }
+  
+  const Modal = () => {
+    return(
+        <div className={`modal-${modalState == true ? 'show' : 'hide'}`}>
+          <div className="modalTitle">
+            {selectedEvent.title}
+          </div>
+          <div className="modalBody">
+              Start Time: {moment(selectedEvent.start).format('hh:mm a')} on {moment(selectedEvent.start).format('MMMM d, YYYY')}  <br/>
+              End Time: {moment(selectedEvent.end).format('hh:mm a')} on {moment(selectedEvent.end).format('MMMM d, YYYY')} <br/>
+          </div>
+          <br/>
+          <div className="modalFooter">
+            <button
+              className='closeModal'
+              onClick={() => {
+                setModalState(false);
+              }}
+              > Cancel </button>
+            <button
+              className='modalDelete'
+              onClick = {() => {deleteEvent(selectedEvent.id); setModalState(false);}}
+              > Delete </button>
+          </div>
+        </div>
+    );
+  } 
+
+  const deleteEvent = async (id) => {
+    const eventDoc = doc(db, "events", id);
+    await deleteDoc(eventDoc);
+  }
+  
   const slotSelection = useCallback(
     ({ start, end }) => {
       const title = window.prompt("New Event Name:");
-      if (title) {
-        setEvents((prev) => [...prev, { start, end, title }]);
+      if (title) {        
+          const addEvent = async () => {
+          await addDoc(eventsCollectionRef, {title: title, start: start, end: end});
+        }
+        addEvent();
+      } else {
+        //display error
       }
     },
     [setEvents]
-  );
-
-  const shiftSelection = useCallback(
-    (events) =>
-      alert(
-        events.title +
-          "'s shift \nBegins at: " +
-          events.start +
-          "\nEnds at: " +
-          events.end
-      ),
-    []
   );
 
   const moveEvent = useCallback(
     ({ event, start, end, isAllDay: droppedOnAllDaySlot = false }) => {
-      const { allDay } = event;
-      if (!allDay && droppedOnAllDaySlot) {
-        event.allday = true;
+      const { allDay } = event
+      if( !allDay && droppedOnAllDaySlot) {
+        event.allday = true
       }
+      console.log(start, end)
 
-      setEvents((prev) => {
-        const existing = prev.find((ev) => ev.id === event.id);
-        const filtered = prev.filter((ev) => ev.id !== event.id);
-        return [...filtered, { ...existing, start, end, allDay }];
-      });
+      const updateEvent = async () => {
+        await updateDoc(doc(db, "events", event.id), {start: start, end: end})
+      }
+      updateEvent();
+      
     },
     [setEvents]
-  );
+  )
 
   const resizeEvent = useCallback(
     ({ event, start, end }) => {
-      setEvents((prev) => {
-        const existing = prev.find((ev) => ev.id === event.id);
-        const filtered = prev.filter((ev) => ev.id !== event.id);
-        return [...filtered, { ...existing, start, end }];
-      });
-    },
-    [setEvents]
-  );
+      const updateEvent = async () => {
+        await updateDoc(doc(db, "events", event.id), {start: start, end: end})
+      }
+      updateEvent();
+      
+    },[setEvents])
 
   console.log(myEvents);
-
+  
   return (
-    <div>
-      <NavBar />
-      <h1 className="calendar-header"> Calendar </h1>
-      <div className="calendar-container">
-        <DragandDropCalendar
-          style={{ backgroundColor: "#FAF9F9" }}
-          localizer={localizer}
-          defaultView={Views.WEEK}
-          events={myEvents}
-          defaultDate={moment().toDate()}
-          onSelectEvent={shiftSelection}
-          onSelectSlot={slotSelection}
-          selectable
-          onEventDrop={moveEvent}
-          onEventResize={resizeEvent}
-          resizable
-        />
+      <div>
+        <NavBar/>
+        <h1 class="calendar-header"> Calendar </h1>
+        <div class="calendar-container">
+          <DragandDropCalendar
+            style={{backgroundColor: '#FAF9F9'}}
+            localizer={localizer}
+            defaultView={Views.WEEK}
+            events={myEvents}
+            defaultDate={moment().toDate()}
+            onSelectEvent={(e) => shiftSelection(e)}
+            onSelectSlot={slotSelection}
+            selectable
+            onEventDrop={moveEvent}
+            onEventResize={resizeEvent}
+            popup
+            resizable
+          />
+          {selectedEvent && <Modal/>}
+        </div>
       </div>
-    </div>
-  );
+    );
 }
 
 export default showCalendar;
-
-//temporary, should be a hover probably
-/* i think if we're in month view, clicking an event should take us
-              to the week view of that event - james */
