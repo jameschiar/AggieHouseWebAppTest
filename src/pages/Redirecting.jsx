@@ -7,9 +7,13 @@ import { useUser } from "../context/UserProvider";
 const Redirecting = () => {
   const { userFirebaseData } = useUser();
   const isEmpty = (obj) => {
-    return Object.keys(obj).length === 0;
+    return (
+      obj &&
+      Object.keys(obj).length === 0 &&
+      Object.getPrototypeOf(obj) === Object.prototype
+    );
   };
-  console.log(userFirebaseData);
+
   const navigate = useNavigate();
 
   useEffect(() => {

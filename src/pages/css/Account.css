@@ -4,8 +4,7 @@
   margin: 100px;
   margin-left: 20px;
   margin-right: 20px;
-  min-width: 950px;
-  
+  min-width: 1000px;
 }
 
 .account-container {
@@ -26,7 +25,7 @@
 
 .account-info > div {
   background-color: #FAF9F8;
-  padding: 20px 0px 20px 30px;
+  padding: 20px 0px 20px 20px;
   font-size: 2em;
   margin: 0px;
   width: calc(100% - 30px);
@@ -36,16 +35,16 @@
 }
 .account-info > div > p {
   margin: 0px;
-  font-size: 0.9em;
+  font-size: 0.8em;
 }
 
 .account-info > div > button {
-  font-size: 20px;
+  font-size: 15px;
   font-weight: 300;
   background-color: #E8E2DC;
   color: #545454;
   width: auto;
-  height: 35px;
+  height: 25px;
   border-radius: 7.5px;
   border: none;
 }

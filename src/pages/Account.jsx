@@ -12,7 +12,7 @@ import { updateDoc, doc, onSnapshot } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 
 function Account() {
-  const [pronoun, setPronoun] = useState("");
+  const [pronouns, setPronouns] = useState("");
   const [number, setNumber] = useState();
   const [showPronounForm, togglePronounForm] = useState(false);
   const [showNumberForm, toggleNumberForm] = useState(false);
@@ -32,22 +32,38 @@ function Account() {
     };
   }, []);
 
-  const updatePronouns = async () => {
-    togglePronounForm(false);
-    const newFields = { pronouns: pronoun };
+  const updatePronouns = async (e) => {
+    e.preventDefault();
+    togglePronounForm(!showPronounForm);
+    const newFields = { pronouns: pronouns };
     await updateDoc(userDocRef, newFields);
   };
 
-  const updateNumber = async () => {
+  const updateNumber = async (e) => {
+    e.preventDefault();
     toggleNumberForm(!showNumberForm);
     const newFields = { phoneNumber: number };
     await updateDoc(userDocRef, newFields);
   };
 
+  const cancelPronounForm = () => {
+    setPronouns("");
+    togglePronounForm(!showPronounForm);
+  };
+
+  const cancelNumberForm = () => {
+    setNumber("");
+    toggleNumberForm(!showNumberForm);
+  };
+
   return (
     <main>
       <NavBar />
-      <div style={{ display: "flex", justifyContent: "center" }}>
+      <div
+        style={{
+          maxWidth: "1100px",
+        }}
+      >
         <div className="container">
           <div className="account-container">
             <div className="profile-picture">
@@ -74,15 +90,16 @@ function Account() {
                   </button>
                 )}
                 {showPronounForm && (
-                  <input
-                    placeholder="Pronouns"
-                    onChange={(event) => {
-                      setPronoun(event.target.value);
-                    }}
-                  />
-                )}
-                {showPronounForm && (
-                  <button onClick={updatePronouns}>Submit</button>
+                  <form onSubmit={updatePronouns}>
+                    <input
+                      placeholder="Pronouns"
+                      onChange={(event) => {
+                        setPronouns(event.target.value);
+                      }}
+                    />
+                    <input type="submit" />
+                    <button onClick={cancelPronounForm}>Cancel</button>
+                  </form>
                 )}
               </div>
               <div>
@@ -97,16 +114,16 @@ function Account() {
                   </button>
                 )}
                 {showNumberForm && (
-                  <input
-                    placeholder="e.g. +11231231234"
-                    type="tel"
-                    onChange={(event) => {
-                      setNumber(event.target.value);
-                    }}
-                  />
-                )}
-                {showNumberForm && (
-                  <button onClick={updateNumber}>Submit</button>
+                  <form onSubmit={updateNumber}>
+                    <input
+                      placeholder="e.g. +11231231234"
+                      onChange={(event) => {
+                        setNumber(event.target.value);
+                      }}
+                    />
+                    <input type="submit" />
+                    <button onClick={cancelNumberForm}>Cancel</button>
+                  </form>
                 )}
               </div>
               <div>

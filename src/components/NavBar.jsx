@@ -9,32 +9,34 @@ function NavBar() {
 
   return (
     <div id="navbar">
-      <Link to="/dashboard">
-        <img src={logo} id="logo" />
-      </Link>
+      <div style={{ display: "flex" }}>
+        <Link to="/dashboard">
+          <img src={logo} id="logo" />
+        </Link>
 
-      <div className="nav">
-        <p>
-          <Link to="/calendar">
-            <button className="nav-links">Calendar </button>
-          </Link>
-        </p>
-        <p>
-          <Link to="/attendance">
-            <button className="nav-links">Attendance </button>
-          </Link>
-        </p>
-        <p>
-          <Link to="/todo">
-            <button className="nav-links">To-Do </button>{" "}
-          </Link>
-        </p>
-        <p>
-          <Link to="/resources">
-            {" "}
-            <button className="nav-links">Resources </button>{" "}
-          </Link>
-        </p>
+        <div className="nav">
+          <p>
+            <Link to="/calendar">
+              <button className="nav-links">Calendar </button>
+            </Link>
+          </p>
+          <p>
+            <Link to="/attendance">
+              <button className="nav-links">Attendance </button>
+            </Link>
+          </p>
+          <p>
+            <Link to="/todo">
+              <button className="nav-links">To-Do </button>{" "}
+            </Link>
+          </p>
+          <p>
+            <Link to="/resources">
+              {" "}
+              <button className="nav-links">Resources </button>{" "}
+            </Link>
+          </p>
+        </div>
       </div>
 
       <div className="account">

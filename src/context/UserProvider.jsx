@@ -13,7 +13,6 @@ import { createContext, useState } from "react";
 import { auth, db } from "../firebase-config";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import Loading from "../pages/Loading";
 
 const UserContext = createContext({});
 
@@ -42,6 +41,7 @@ export const UserProvider = ({ children }) => {
               displayName: user.displayName,
               email: user.email,
               photoURL: user.photoURL,
+              roles: ["user"],
             });
           } catch (e) {
             console.log(e);
