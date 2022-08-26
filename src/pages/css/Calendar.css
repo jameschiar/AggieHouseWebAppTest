@@ -18,9 +18,9 @@
 .modal-show{
   display: block;
   margin-top: 50px;
+  margin-bottom: 40px;
   font-family: poppins;
   text-align: center;
-  overflow-y: auto;
 }
 
 .modal-hide{
@@ -31,6 +31,12 @@
   font-weight: 450;
   color: #545454;
   font-size: 28px;
+}
+
+.modalNotes{
+  margin-top: 15px;
+  font-weight: 350;
+  font-size: 20px;
 }
 
 .modalBody{
@@ -52,6 +58,7 @@
   height: 30px;
   border-radius: 50px;
   border: none;
+  margin-right: 80px;
 }
 
 .modalDelete{
@@ -63,5 +70,15 @@
   height: 30px;
   border-radius: 50px;
   border: none;
-  margin-left: 80px;
+}
+
+.modalSubmit{
+  font-size: 12px;
+  font-weight: 300;
+  background-color: #FAF9F8;
+  color: #545454;
+  width: 100px;
+  height: 20px;
+  border-radius: 50px;
+  border: none;
 }

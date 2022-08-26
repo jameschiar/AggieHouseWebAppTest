@@ -33,6 +33,12 @@ function NavBar() {
             <button className="nav-links">To-Do </button>{" "}
           </Link>
         </p>
+        <p>
+          <Link to="/resources">
+            {" "}
+            <button className="nav-links">Resources </button>{" "}
+          </Link>
+        </p>
       </div>
 
       <div className="account">

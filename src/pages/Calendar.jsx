@@ -1,4 +1,4 @@
-import React, {useState, useCallback, useEffect} from 'react';
+import React, {useState, useCallback, useEffect, useRef} from 'react';
 import NavBar from '../components/NavBar.jsx';
 
 import { db } from '../firebase-config.js';
@@ -12,23 +12,20 @@ import 'react-big-calendar/lib/css/react-big-calendar.css';
 import'react-big-calendar/lib/addons/dragAndDrop/styles.css';
 import './css/Calendar.css';
 
-import events from '../data/events';
-
 const localizer = momentLocalizer(moment);
 const DragandDropCalendar = withDragAndDrop(Calendar)
 
-/*
-  TODO:
-
-  - autoScroll to the Modal
-  
-*/
 
 function showCalendar() {
   const [modalState, setModalState] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState(undefined);
   const [myEvents, setEvents] = useState([]);
   const eventsCollectionRef = collection(db, "events");
+  const bottomRef = useRef(null);
+
+  useEffect(() => {
+    bottomRef.current?.scrollIntoView({behavior: 'smooth'});
+  }, [modalState]);
 
   useEffect(() => {
 
@@ -42,8 +39,8 @@ function showCalendar() {
   },[]);
 
   const shiftSelection = (events) => {
-    setSelectedEvent(events)
-    setModalState(true)
+    setSelectedEvent(events);
+    setModalState(true);
   }
   
   const Modal = () => {
@@ -69,6 +66,7 @@ function showCalendar() {
               onClick = {() => {deleteEvent(selectedEvent.id); setModalState(false);}}
               > Delete </button>
           </div>
+        <div ref={bottomRef}/>
         </div>
     );
   } 
