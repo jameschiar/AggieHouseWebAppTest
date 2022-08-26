@@ -11,6 +11,7 @@ import Account from "./pages/Account";
 import Layout from "./components/Layout";
 import Missing from "./pages/Missing";
 import Unauthorized from "./pages/Unauthorized";
+import Resources from "./pages/Resources";
 import RequireAuth from "./components/RequireAuth";
 import Redirecting from "./pages/Redirecting";
 
@@ -34,6 +35,7 @@ function App() {
           <Route path="/calendar" element={<ShowCalendar />}></Route>
           <Route path="/attendance" element={<Attendance />}></Route>
           <Route path="/todo" element={<Todo />}></Route>
+          <Route path="/resources" element={<Resources />}></Route>
           <Route path="/account" element={<Account />}></Route>
         </Route>
 

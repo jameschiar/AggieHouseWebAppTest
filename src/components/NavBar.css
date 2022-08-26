@@ -20,6 +20,7 @@ img#logo {
   height: 50px;
   border-radius: 7.5px;
   border: none;
+  margin-left: 40px;
 }
 
 .nav-links:hover {

@@ -1,0 +1,25 @@
+.meals-container {
+  background-color: white;
+  height: 400px;
+  padding: 10px;
+  width: auto;
+  margin: 10%;
+  margin-top: 10px;
+}
+
+.meals-header{
+  font-family: poppins;
+  font-weight: 450;
+  color: #545454;
+  text-align: center;
+  margin-top: 50px;
+}
+
+.chores-header{
+  font-family: poppins;
+  font-weight: 450;
+  color: #545454;
+  text-align: center;
+  margin-top: 60px;
+}
+
