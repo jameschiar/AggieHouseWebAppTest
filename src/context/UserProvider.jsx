@@ -1,14 +1,14 @@
 // allow the entire app to gain access to user
 
 import React from "react";
+import { useEffect } from "react";
 import {
   onAuthStateChanged,
   signInWithPopup,
   GoogleAuthProvider,
   signOut,
 } from "firebase/auth";
-import { doc, getDoc, setDoc } from "@firebase/firestore";
-import { useEffect } from "react";
+import { collection, doc, getDoc, getDocs, setDoc } from "@firebase/firestore";
 import { createContext, useState } from "react";
 import { auth, db } from "../firebase-config";
 import { useContext } from "react";
@@ -22,6 +22,7 @@ export const useUser = () => {
 
 export const UserProvider = ({ children }) => {
   const [user, setUser] = useState({}); // user returned by auth
+  const [users, setUsers] = useState([]);
   const [userFirebaseData, setUserFirebaseData] = useState({}); // user fetched in firebase
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
@@ -41,7 +42,7 @@ export const UserProvider = ({ children }) => {
               displayName: user.displayName,
               email: user.email,
               photoURL: user.photoURL,
-              roles: ["user"],
+              role: "user",
             });
           } catch (e) {
             console.log(e);
@@ -84,7 +85,15 @@ export const UserProvider = ({ children }) => {
             .then((result) => {
               setUserFirebaseData(result.data());
             })
-            .then(() => callback());
+            .then(() => {
+              getDocs(collection(db, "users"))
+                .then((result) => {
+                  setUsers(
+                    result.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
+                  );
+                })
+                .then(() => callback());
+            });
         };
 
         getFirebaseData(() => {
@@ -105,6 +114,8 @@ export const UserProvider = ({ children }) => {
   const value = {
     user,
     setUser,
+    users,
+    setUsers,
     userFirebaseData,
     setUserFirebaseData,
     signInWithGoogle,

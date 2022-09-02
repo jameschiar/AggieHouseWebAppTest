@@ -51,6 +51,17 @@ td{
   background-color: #545454;
 }
 
+#submit-button {
+  font-size: 22px;
+  font-weight: 300;
+  background-color: #BBAB9D;
+  color: #545454;
+  width: 125px;
+  height: 50px;
+  border-radius: 7.5px;
+  border: none;
+}
+
 {/*below this is old stuff but keeping it here for now in case the table method doesnt work out*/}
 
 #attendance-sheet-old {

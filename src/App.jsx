@@ -2,18 +2,20 @@ import React from "react";
 import "./App.css";
 
 // import pages
-import Login from "./pages/Login";
-import Dashboard from "./pages/Dashboard";
-import ShowCalendar from "./pages/Calendar";
-import Attendance from "./pages/Attendance";
-import Todo from "./pages/Todo";
 import Account from "./pages/Account";
+import Admin from "./pages/Admin";
+import Attendance from "./pages/Attendance";
+import Dashboard from "./pages/Dashboard";
 import Layout from "./components/Layout";
+import Login from "./pages/Login";
+import ManageUsers from "./pages/ManageUsers";
 import Missing from "./pages/Missing";
-import Unauthorized from "./pages/Unauthorized";
-import Resources from "./pages/Resources";
-import RequireAuth from "./components/RequireAuth";
 import Redirecting from "./pages/Redirecting";
+import RequireAuth from "./components/RequireAuth";
+import Resources from "./pages/Resources";
+import ShowCalendar from "./pages/Calendar";
+import Todo from "./pages/Todo";
+import Unauthorized from "./pages/Unauthorized";
 
 import { Routes, Route } from "react-router-dom";
 import { useUser } from "./context/UserProvider";
@@ -25,18 +27,22 @@ function App() {
     <Routes>
       <Route path="/" element={<Layout />}>
         {/* public routes */}
-        <Route path="/login" element={<Login />}></Route>
-        <Route path="/Redirecting" element={<Redirecting />}></Route>
-        <Route path="/unauthorized" element={<Unauthorized />}></Route>
+        <Route path="login" element={<Login />}></Route>
+        <Route path="redirecting" element={<Redirecting />}></Route>
+        <Route path="unauthorized" element={<Unauthorized />}></Route>
         {/* private routes */}
         <Route element={<RequireAuth allowedRoles={["admin", "volunteer"]} />}>
-          <Route path="/" element={<Dashboard />}></Route>
-          <Route path="/dashboard" element={<Dashboard />}></Route>
-          <Route path="/calendar" element={<ShowCalendar />}></Route>
-          <Route path="/attendance" element={<Attendance />}></Route>
-          <Route path="/todo" element={<Todo />}></Route>
-          <Route path="/resources" element={<Resources />}></Route>
-          <Route path="/account" element={<Account />}></Route>
+          <Route path="" element={<Dashboard />}></Route>
+          <Route path="calendar" element={<ShowCalendar />}></Route>
+          <Route path="attendance" element={<Attendance />}></Route>
+          <Route path="todo" element={<Todo />}></Route>
+          <Route path="resources" element={<Resources />}></Route>
+          <Route path="account" element={<Account />}></Route>
+        </Route>
+
+        <Route element={<RequireAuth allowedRoles={["admin"]} />}>
+          <Route path="admin" element={<Admin />}></Route>
+          <Route path="manageusers" element={<ManageUsers />}></Route>
         </Route>
 
         {/* catch all */}

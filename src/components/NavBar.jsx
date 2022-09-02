@@ -1,16 +1,20 @@
 import React from "react";
 import logo from "../images/logo.svg";
-import "./NavBar.css";
+import "./css/NavBar.css";
 import { Link } from "react-router-dom";
 import { useUser } from "../context/UserProvider.jsx";
 
 function NavBar() {
-  const { user } = useUser();
+  const { user, userFirebaseData } = useUser();
+
+  const isAdmin = () => {
+    return userFirebaseData?.role === "admin";
+  };
 
   return (
     <div id="navbar">
       <div style={{ display: "flex" }}>
-        <Link to="/dashboard">
+        <Link to="/">
           <img src={logo} id="logo" />
         </Link>
 
@@ -27,15 +31,21 @@ function NavBar() {
           </p>
           <p>
             <Link to="/todo">
-              <button className="nav-links">To-Do </button>{" "}
+              <button className="nav-links">To-Do </button>
             </Link>
           </p>
           <p>
             <Link to="/resources">
-              {" "}
-              <button className="nav-links">Resources </button>{" "}
+              <button className="nav-links">Resources </button>
             </Link>
           </p>
+          {isAdmin() && (
+            <p>
+              <Link to="/admin">
+                <button className="nav-links">Admin </button>
+              </Link>
+            </p>
+          )}
         </div>
       </div>
 

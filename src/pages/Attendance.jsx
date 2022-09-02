@@ -5,7 +5,6 @@ import { useState } from "react";
 import { addDoc, collection, onSnapshot } from "@firebase/firestore";
 import { db } from "../firebase-config";
 import { useEffect } from "react";
-import Loading from "./Loading.jsx";
 import AttendanceTable from "../components/AttendanceTable.jsx";
 
 function Attendance() {
@@ -39,9 +38,13 @@ function Attendance() {
     };
   }, []);
 
+  const submitAttendanceData = () => {
+    console.log("SUBMITTING DATA");
+  };
+
   // add resident to table
   const addResident = async (e) => {
-    e.preventDefault(); // prevent page refresh
+    e.preventDefault(); // prevent page refresh on form submit
 
     // error check for empty first or last name
     if (residentFamilyName.length == 0 || residentGivenName.length == 0) {
@@ -75,12 +78,25 @@ function Attendance() {
     <div>
       <NavBar />
       {!isBusy && (
-        <div>
-          <AttendanceTable
-            attendanceData={attendanceData}
-            deleteState={deleteState}
-          />
-        </div>
+        <>
+          <div>
+            <AttendanceTable
+              attendanceData={attendanceData}
+              deleteState={deleteState}
+            />
+          </div>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "end",
+              marginRight: "30px",
+            }}
+          >
+            <button onClick={submitAttendanceData} id="submit-button">
+              Submit
+            </button>
+          </div>
+        </>
       )}
       <div style={{ display: "flex", flexDirection: "column", width: "130px" }}>
         {!showResidentForm && (

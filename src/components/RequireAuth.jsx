@@ -10,14 +10,16 @@ const RequireAuth = ({ allowedRoles }) => {
   const { user, userFirebaseData } = useUser(); // current user from auth
 
   const isEmpty = (obj) => {
-    return Object.keys(obj).length === 0;
+    return (
+      obj &&
+      Object.keys(obj).length === 0 &&
+      Object.getPrototypeOf(obj) === Object.prototype
+    );
   };
 
   // the user can access pages based on their role
   const isAuthorized = () => {
-    return userFirebaseData?.roles?.find((role) =>
-      allowedRoles?.includes(role)
-    );
+    return allowedRoles?.includes(userFirebaseData?.role);
   };
 
   // if user is authenticated, display private pages

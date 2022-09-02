@@ -1,7 +1,7 @@
 import React from "react";
 
 const Missing = () => {
-  return <div>page do not exist mate</div>;
+  return <div>Error: Page does not exist</div>;
 };
 
 export default Missing;

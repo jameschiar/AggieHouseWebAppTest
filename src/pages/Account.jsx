@@ -34,6 +34,10 @@ function Account() {
 
   const updatePronouns = async (e) => {
     e.preventDefault();
+    if (!pronouns) {
+      alert("Pronouns empty.");
+      return;
+    }
     togglePronounForm(!showPronounForm);
     const newFields = { pronouns: pronouns };
     await updateDoc(userDocRef, newFields);
@@ -41,6 +45,10 @@ function Account() {
 
   const updateNumber = async (e) => {
     e.preventDefault();
+    if (!number) {
+      alert("Number empty.");
+      return;
+    }
     toggleNumberForm(!showNumberForm);
     const newFields = { phoneNumber: number };
     await updateDoc(userDocRef, newFields);
@@ -62,6 +70,8 @@ function Account() {
       <div
         style={{
           maxWidth: "1100px",
+          marginLeft: "auto",
+          marginRight: "auto",
         }}
       >
         <div className="container">

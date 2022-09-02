@@ -18,7 +18,7 @@ const Redirecting = () => {
 
   useEffect(() => {
     if (!isEmpty(userFirebaseData)) {
-      navigate("/dashboard");
+      navigate("/");
     }
   }, [userFirebaseData]);
 
