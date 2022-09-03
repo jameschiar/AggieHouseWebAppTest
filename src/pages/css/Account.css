@@ -13,8 +13,27 @@
 }
 
 .profile-picture {
+  display: flex;
+  flex-direction: column;
   margin: 0px 30px 0px 0px;
-  
+  align-items: center;
+}
+
+.profile-picture > img {
+  object-fit: cover;
+}
+
+.profile-picture > button {
+  margin-top: 10px;
+  font-size: 15px;
+  font-weight: 300;
+  background-color: #FAF9F8;
+  color: #545454;
+  width: max-content;
+  height: 25px;
+  border-radius: 7.5px;
+  border: none;
+  cursor: pointer;
 }
 
 .account-info {
@@ -33,6 +52,7 @@
   display: flex;
   align-items: center;
 }
+
 .account-info > div > p {
   margin: 0px;
   font-size: 0.8em;
@@ -47,6 +67,8 @@
   height: 25px;
   border-radius: 7.5px;
   border: none;
+  cursor: pointer;
+
 }
 
 .upcoming-shifts {

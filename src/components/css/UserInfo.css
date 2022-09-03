@@ -16,3 +16,7 @@
     border-radius: 7px;
     border: none;
 }
+
+img.pfp {
+    object-fit: cover;
+}

@@ -5,6 +5,7 @@ import { deleteDoc, doc, updateDoc } from "@firebase/firestore";
 
 import "./css/UserInfo.css";
 
+// props: user is data from firebase
 function UserInfo({ user }) {
   const [edit, toggleEdit] = useState(false);
   const [newNumber, setNewNumber] = useState("");
@@ -38,7 +39,13 @@ function UserInfo({ user }) {
 
   return (
     <div style={{ display: "flex", alignItems: "center" }}>
-      <img src={user.photoURL} referrerPolicy="no-referrer" />
+      <img
+        src={user.photoURL}
+        className="pfp"
+        height="96px"
+        width="96px"
+        referrerPolicy="no-referrer"
+      />
       <div className="user-card" style={{ marginLeft: "10px" }}>
         <p>
           Name: {user.displayName} {user.pronouns && "("}

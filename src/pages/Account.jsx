@@ -1,21 +1,29 @@
 import React from "react";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import NavBar from "../components/NavBar.jsx";
 import "./css/Account.css";
 
 import { useUser } from "../context/UserProvider.jsx";
 
 // firestore
-import { db } from "../firebase-config.js";
+import { db, storage } from "../firebase-config.js";
 import { updateDoc, doc, onSnapshot } from "firebase/firestore";
-
-import { useNavigate } from "react-router-dom";
+import {
+  deleteObject,
+  getDownloadURL,
+  ref,
+  uploadBytes,
+} from "firebase/storage";
+import { v4 } from "uuid";
 
 function Account() {
   const [pronouns, setPronouns] = useState("");
   const [number, setNumber] = useState();
   const [showPronounForm, togglePronounForm] = useState(false);
   const [showNumberForm, toggleNumberForm] = useState(false);
+  const [pictureUploadform, togglePictureUploadForm] = useState(false);
+  const [imageUpload, setImageUpload] = useState(null);
 
   const { user, userFirebaseData, setUserFirebaseData, logoutGoogle } =
     useUser(); // user from auth
@@ -64,6 +72,33 @@ function Account() {
     toggleNumberForm(!showNumberForm);
   };
 
+  const uploadImage = () => {
+    if (imageUpload == null) {
+      alert("No image selected!");
+      return;
+    }
+
+    // delete current pfp in storage first
+    const oldImageRef = ref(storage, userFirebaseData.photoURL);
+    deleteObject(oldImageRef)
+      .then(() => {
+        console.log("image delete success");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+    // v4() generates random string to prevent duplicate file names
+    const imageRef = ref(storage, `images/${imageUpload.name + v4()}`);
+    uploadBytes(imageRef, imageUpload).then((snapshot) => {
+      getDownloadURL(snapshot.ref).then((url) => {
+        updateDoc(userDocRef, { photoURL: url }).then(() => {
+          alert("image uploaded");
+        });
+      });
+    });
+  };
+
   return (
     <main>
       <NavBar />
@@ -78,15 +113,43 @@ function Account() {
           <div className="account-container">
             <div className="profile-picture">
               <img
-                src={user.photoURL}
+                src={userFirebaseData.photoURL}
                 referrerPolicy="no-referrer"
                 width="350px"
                 height="350px"
               />
+              {!pictureUploadform && (
+                <button
+                  onClick={() => {
+                    togglePictureUploadForm(!pictureUploadform);
+                  }}
+                >
+                  Change Profile Picture
+                </button>
+              )}
+              {pictureUploadform && (
+                <div>
+                  <input
+                    type="file"
+                    accept=".png, .jpg, .jpeg"
+                    onChange={(e) => {
+                      setImageUpload(e.target.files[0]);
+                    }}
+                  ></input>
+                  <button onClick={uploadImage}>Upload Image</button>
+                  <button
+                    onClick={() => {
+                      togglePictureUploadForm(!pictureUploadform);
+                    }}
+                  >
+                    Cancel
+                  </button>
+                </div>
+              )}
             </div>
             <div className="account-info">
               <div>
-                <p> Name: {user.displayName} </p>
+                <p> Name: {userFirebaseData.displayName} </p>
               </div>
               <div>
                 <p>Pronouns: {userFirebaseData.pronouns}</p>

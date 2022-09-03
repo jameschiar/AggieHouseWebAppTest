@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { useUser } from "../context/UserProvider.jsx";
 
 function NavBar() {
-  const { user, userFirebaseData } = useUser();
+  const { userFirebaseData } = useUser();
 
   const isAdmin = () => {
     return userFirebaseData?.role === "admin";
@@ -19,41 +19,39 @@ function NavBar() {
         </Link>
 
         <div className="nav">
-          <p>
-            <Link to="/calendar">
-              <button className="nav-links">Calendar </button>
-            </Link>
-          </p>
-          <p>
-            <Link to="/attendance">
-              <button className="nav-links">Attendance </button>
-            </Link>
-          </p>
-          <p>
-            <Link to="/todo">
-              <button className="nav-links">To-Do </button>
-            </Link>
-          </p>
-          <p>
-            <Link to="/resources">
-              <button className="nav-links">Resources </button>
-            </Link>
-          </p>
+          <Link to="/calendar">
+            <button className="nav-links">Calendar </button>
+          </Link>
+
+          <Link to="/attendance">
+            <button className="nav-links">Attendance </button>
+          </Link>
+
+          <Link to="/todo">
+            <button className="nav-links">To-Do </button>
+          </Link>
+
+          <Link to="/resources">
+            <button className="nav-links">Resources </button>
+          </Link>
+
           {isAdmin() && (
-            <p>
-              <Link to="/admin">
-                <button className="nav-links">Admin </button>
-              </Link>
-            </p>
+            <Link to="/admin">
+              <button className="nav-links">Admin </button>
+            </Link>
           )}
         </div>
       </div>
 
       <div className="account">
         <Link to="/account">
-          <img id="pfp" src={user.photoURL} referrerPolicy="no-referrer" />
+          <img
+            id="pfp"
+            src={userFirebaseData.photoURL}
+            referrerPolicy="no-referrer"
+          />
         </Link>
-        <Link to="/account">{user.displayName} </Link>
+        <Link to="/account">{userFirebaseData.displayName} </Link>
       </div>
     </div>
   );

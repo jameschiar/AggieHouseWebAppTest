@@ -31,6 +31,7 @@ img#logo {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
+  align-items: center;
   width: auto;
   justify-self: start;
 }
@@ -46,7 +47,7 @@ img#logo {
 .account > a {
   margin-left: 15px;
   font-family: poppins;
-  font-size: 25px;
+  font-size: 23px;
   font-weight: 300;
 }
 
@@ -64,4 +65,5 @@ img#logo {
   width:50px;
   height:50px;
   border-radius:25px;
+  object-fit: cover;
 }
