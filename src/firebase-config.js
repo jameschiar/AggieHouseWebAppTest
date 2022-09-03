@@ -17,13 +17,13 @@ const APP_ID= import.meta.env.VITE_APP_ID
 const MEASUREMENT_ID= import.meta.env.VITE_MEASUREMENT_ID
 
 const firebaseConfig = {
-  apiKey: API_KEY,
-  authDomain: AUTH_DOMAIN,
-  projectId: PROJECT_ID,
-  storageBucket: STORAGE_BUCKET,
-  messagingSenderId: MESSAGING_SENDER_ID,
-  appId: APP_ID,
-  measurementId: MEASUREMENT_ID
+  apiKey: 'AIzaSyBVe5EXHTpRPIiNSAGEkstZtpIWxmz2Mfw',
+  authDomain: "aggie-house.firebaseapp.com",
+  projectId: "aggie-house",
+  storageBucket: "aggie-house.appspot.com",
+  messagingSenderId: "509740822970",
+  appId: "1:509740822970:web:22da7e2fc3e1b3b9c76d83",
+  measurementId: "G-K0TCQC23WT"
 };
 
 const app = initializeApp(firebaseConfig);
