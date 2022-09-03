@@ -16,13 +16,13 @@ import Resources from "./pages/Resources";
 import ShowCalendar from "./pages/Calendar";
 import Todo from "./pages/Todo";
 import Unauthorized from "./pages/Unauthorized";
+import Lock from "./pages/Locker";
 
 import { Routes, Route } from "react-router-dom";
 import { useUser } from "./context/UserProvider";
 
 function App() {
   const { userFirebaseData } = useUser();
-  console.log(userFirebaseData);
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
@@ -38,6 +38,7 @@ function App() {
           <Route path="todo" element={<Todo />}></Route>
           <Route path="resources" element={<Resources />}></Route>
           <Route path="account" element={<Account />}></Route>
+          <Route path="lock" element={<Lock />}></Route>
         </Route>
 
         <Route element={<RequireAuth allowedRoles={["admin"]} />}>

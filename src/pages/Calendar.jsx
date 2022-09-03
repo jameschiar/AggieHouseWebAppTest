@@ -1,11 +1,14 @@
 import React, { useState, useCallback, useEffect, useRef } from "react";
 import NavBar from "../components/NavBar.jsx";
 
+import { useUser } from "../context/UserProvider";
+
 import { db } from "../firebase-config.js";
 import {
   collection,
   doc,
   updateDoc,
+  getDocs,
   addDoc,
   onSnapshot,
   deleteDoc,
@@ -28,6 +31,16 @@ function showCalendar() {
   const [myEvents, setEvents] = useState([]);
   const eventsCollectionRef = collection(db, "events");
   const bottomRef = useRef(null);
+
+  const { userFirebaseData } = useUser();
+
+  const isVolunteer = () => {
+    return userFirebaseData?.roles?.find((role) => role === "volunteer");
+  };
+
+  const isAdmin = () => {
+    return userFirebaseData?.roles?.find((role) => role === "admin");
+  };
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -90,24 +103,27 @@ function showCalendar() {
   };
 
   const deleteEvent = async (id) => {
-    const eventDoc = doc(db, "events", id);
-    await deleteDoc(eventDoc);
+    if (isAdmin()) {
+      const eventDoc = doc(db, "events", id);
+      await deleteDoc(eventDoc);
+    }
   };
-
   const slotSelection = useCallback(
     ({ start, end }) => {
-      const title = window.prompt("New Event Name:");
-      if (title) {
-        const addEvent = async () => {
-          await addDoc(eventsCollectionRef, {
-            title: title,
-            start: start,
-            end: end,
-          });
-        };
-        addEvent();
-      } else {
-        //display error
+      if (isAdmin()) {
+        const title = window.prompt("New Event Name:");
+        if (title) {
+          const addEvent = async () => {
+            await addDoc(eventsCollectionRef, {
+              title: title,
+              start: start,
+              end: end,
+            });
+          };
+          addEvent();
+        } else {
+          //display error
+        }
       }
     },
     [setEvents]
@@ -115,32 +131,36 @@ function showCalendar() {
 
   const moveEvent = useCallback(
     ({ event, start, end, isAllDay: droppedOnAllDaySlot = false }) => {
-      const { allDay } = event;
-      if (!allDay && droppedOnAllDaySlot) {
-        event.allday = true;
-      }
-      console.log(start, end);
+      if (isAdmin()) {
+        const { allDay } = event;
+        if (!allDay && droppedOnAllDaySlot) {
+          event.allday = true;
+        }
+        console.log(start, end);
 
-      const updateEvent = async () => {
-        await updateDoc(doc(db, "events", event.id), {
-          start: start,
-          end: end,
-        });
-      };
-      updateEvent();
+        const updateEvent = async () => {
+          await updateDoc(doc(db, "events", event.id), {
+            start: start,
+            end: end,
+          });
+        };
+        updateEvent();
+      }
     },
     [setEvents]
   );
 
   const resizeEvent = useCallback(
     ({ event, start, end }) => {
-      const updateEvent = async () => {
-        await updateDoc(doc(db, "events", event.id), {
-          start: start,
-          end: end,
-        });
-      };
-      updateEvent();
+      if (isAdmin()) {
+        const updateEvent = async () => {
+          await updateDoc(doc(db, "events", event.id), {
+            start: start,
+            end: end,
+          });
+        };
+        updateEvent();
+      }
     },
     [setEvents]
   );
