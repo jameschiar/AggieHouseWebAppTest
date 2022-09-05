@@ -61,12 +61,14 @@ export const AttendanceNotesForm = ({ val }) => {
           }}
         >
           <input
+            autoFocus
             type="text"
             onChange={(e) => {
               setNotes(e.target.value);
             }}
           />
           <input type="submit" />
+          <button onClick={() => toggleNoteForm(!noteForm)}>Cancel</button>
         </form>
       )}
     </div>

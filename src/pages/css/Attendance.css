@@ -1,5 +1,5 @@
 main {
-  background-color: #E8E2DC;
+  background-color: #e8e2dc;
 }
 
 .attendance-sheet {
@@ -8,8 +8,8 @@ main {
   align-items: center;
   width: auto;
   height: auto;
-  margin: 30px;
-  background-color: #BBAB9D;
+  margin: 10px 30px 30px 30px;
+  background-color: #bbab9d;
   font-family: poppins;
 }
 
@@ -19,7 +19,7 @@ table {
   table-layout: auto;
 }
 
-th{
+th {
   height: 50px;
   font-size: 25px;
   margin-bottom: 10px;
@@ -29,19 +29,19 @@ th{
   font-family: poppins;
 }
 
-td{
+td {
   text-align: center;
   height: 40px;
   color: #545454;
   font-weight: 450;
   font-family: poppins;
   border: none;
-  background-color: #FAF9F8;
+  background-color: #faf9f8;
 }
 
 .table-button {
   font-weight: bolder;
-  background-color: #FAF9F8;
+  background-color: #faf9f8;
   width: 40px;
   height: 40px;
   margin: 10px 0px 10px 0px;
@@ -54,43 +54,10 @@ td{
 #submit-button {
   font-size: 22px;
   font-weight: 300;
-  background-color: #BBAB9D;
+  background-color: #bbab9d;
   color: #545454;
   width: 125px;
   height: 50px;
   border-radius: 7.5px;
   border: none;
-}
-
-{/*below this is old stuff but keeping it here for now in case the table method doesnt work out*/}
-
-#attendance-sheet-old {
-  display: flex;
-  flex-direction: column;
-  width: auto;
-  height: auto;
-  margin: 30px;
-  background-color: #BBAB9D;
-  font-family: poppins;
-}
-
-#column-header{
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-}
-
-.column-header-text {
-  font-size: 25px;
-  margin-bottom: 10px;
-  margin-top: 10px;
-  color: #545454;
-  font-weight: 450;
-}
-
-#columns{
-  width: auto;
-  height: 600px;
-  margin-left: 60px;
-  background-color: #FAF9F8;
 }
