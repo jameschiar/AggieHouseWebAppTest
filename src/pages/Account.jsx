@@ -79,19 +79,26 @@ function Account() {
     }
 
     // delete current pfp in storage first
-    const oldImageRef = ref(storage, userFirebaseData.photoURL);
-    deleteObject(oldImageRef)
-      .then(() => {
-        console.log("image delete success");
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    try {
+      const oldImageRef = ref(storage, userFirebaseData.photoURL);
+      deleteObject(oldImageRef)
+        .then(() => {
+          console.log("image delete success");
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } catch (err) {
+      console.log(err);
+    }
 
     // v4() generates random string to prevent duplicate file names
     const imageRef = ref(storage, `images/${imageUpload.name + v4()}`);
+
+    // upload image to firebase storage
     uploadBytes(imageRef, imageUpload).then((snapshot) => {
       getDownloadURL(snapshot.ref).then((url) => {
+        // set user image URL to new image URL
         updateDoc(userDocRef, { photoURL: url }).then(() => {
           alert("image uploaded");
         });
