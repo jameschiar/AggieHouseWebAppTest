@@ -140,23 +140,6 @@ function Attendance() {
           Delete Residents
         </button>
       </div>
-
-      {/*old stuff without table implementation, keeping just in case for now - Darren
-      
-      <div id="attendance-sheet-old">
-        <div id="column-header">
-          <h1 className="column-header-text">Resident Name</h1>
-          <h2 className="column-header-text">Present</h2>
-          <h3 className="column-header-text">Excused Absence</h3>
-          <h4 className="column-header-text">Unexcused Absence</h4>
-          <h5 className="column-header-text">Notes</h5>
-        </div>
-        <div id="columns">
-          <h1 className="column-text"></h1>
-        </div>
-          
-      </div>
-      */}
     </div>
   );
 }

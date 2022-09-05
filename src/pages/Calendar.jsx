@@ -34,12 +34,8 @@ function showCalendar() {
 
   const { userFirebaseData } = useUser();
 
-  const isVolunteer = () => {
-    return userFirebaseData?.roles?.find((role) => role === "volunteer");
-  };
-
   const isAdmin = () => {
-    return userFirebaseData?.roles?.find((role) => role === "admin");
+    return userFirebaseData?.role === "admin"
   };
 
   useEffect(() => {
@@ -108,6 +104,7 @@ function showCalendar() {
       await deleteDoc(eventDoc);
     }
   };
+  
   const slotSelection = useCallback(
     ({ start, end }) => {
       if (isAdmin()) {
