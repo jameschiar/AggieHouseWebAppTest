@@ -3,6 +3,7 @@ import NavBar from "../components/NavBar.jsx";
 import "./css/Attendance.css";
 import { useState } from "react";
 import {
+  addDoc,
   collection,
   doc,
   getDocs,
@@ -71,16 +72,30 @@ function Attendance() {
 
     const querySnapshot = await getDocs(q);
 
-    //instead of deleting should just updateDoc
     if (!querySnapshot.empty) {
       querySnapshot.forEach((document) => {
         updateDoc(doc(db, "attendanceArchive", document.id), {
           residents: attendanceData,
           date: date,
-        }).then(() => {
-          console.log("attendance data updated");
-        });
+        })
+          .then(() => {
+            console.log("attendance data updated");
+          })
+          .catch((err) => {
+            console.log(err);
+          });
       });
+    } else {
+      addDoc(collection(db, "attendanceArchive"), {
+        residents: attendanceData,
+        date: date,
+      })
+        .then(() => {
+          console.log("attendance data added!");
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     }
     setAttendanceSubmittedMsg("Submitted!");
   };
