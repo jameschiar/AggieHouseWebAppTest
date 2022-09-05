@@ -3,11 +3,8 @@ import NavBar from "../components/NavBar.jsx";
 import "./css/Attendance.css";
 import { useState } from "react";
 import {
-  addDoc,
   collection,
-  deleteDoc,
   doc,
-  getDoc,
   getDocs,
   onSnapshot,
   query,
@@ -17,16 +14,13 @@ import {
 import { db } from "../firebase-config";
 import { useEffect } from "react";
 import AttendanceTable from "../components/AttendanceTable.jsx";
-
-let today = new Date().toLocaleDateString();
+import AttendanceResidentForm from "../components/AttendanceResidentForm.jsx";
 
 function Attendance() {
   const [isBusy, setBusy] = useState(true);
-  const [showResidentForm, setShowResidentForm] = useState(false);
   const [deleteState, toggleDeleteState] = useState(false);
   const [attendanceData, setAttendanceData] = useState([]);
-  const [residentGivenName, setResidentGivenName] = useState("");
-  const [residentFamilyName, setResidentFamilyName] = useState("");
+  const [attendanceSubmittedMsg, setAttendanceSubmittedMsg] = useState("");
   const [date, setDate] = useState("");
   const [newDate, setNewDate] = useState("");
 
@@ -69,6 +63,7 @@ function Attendance() {
   // checks if there's already a submission for current date, then deletes it
   // adds new submission with current date
   const submitAttendanceData = async () => {
+    setAttendanceSubmittedMsg("Submitting...");
     const q = query(
       collection(db, "attendanceArchive"),
       where("date", "==", date)
@@ -87,32 +82,7 @@ function Attendance() {
         });
       });
     }
-  };
-
-  // add resident to table
-  const addResident = async (e) => {
-    e.preventDefault(); // prevent page refresh on form submit
-
-    // error check for empty first or last name
-    if (residentFamilyName.length == 0 || residentGivenName.length == 0) {
-      alert("Must include first and last name");
-      return;
-    }
-
-    // set up fields to add to attendance collection
-    const fields = {
-      familyName: residentFamilyName,
-      givenName: residentGivenName,
-      notes: "",
-      presence: "",
-    };
-
-    await addDoc(collection(db, "attendance"), fields);
-
-    // reset values and close form
-    setResidentFamilyName("");
-    setResidentGivenName("");
-    setShowResidentForm(false);
+    setAttendanceSubmittedMsg("Submitted!");
   };
 
   // change the attendance table to chosen date
@@ -168,9 +138,13 @@ function Attendance() {
             style={{
               display: "flex",
               justifyContent: "end",
+              alignItems: "center",
               marginRight: "30px",
             }}
           >
+            <span style={{ marginRight: "10px" }}>
+              {attendanceSubmittedMsg}
+            </span>
             <button onClick={submitAttendanceData} id="submit-button">
               Submit
             </button>
@@ -178,46 +152,7 @@ function Attendance() {
         </>
       )}
       <div style={{ display: "flex", flexDirection: "column", width: "130px" }}>
-        {!showResidentForm && (
-          <button
-            onClick={() => {
-              setShowResidentForm(true);
-            }}
-          >
-            Add Resident
-          </button>
-        )}
-        {showResidentForm && (
-          <form onSubmit={addResident}>
-            <input
-              autoFocus
-              type="text"
-              placeholder="First Name"
-              onChange={(e) => {
-                setResidentGivenName(e.target.value);
-              }}
-            />
-            <input
-              type="text"
-              placeholder="Last Name"
-              onChange={(e) => {
-                setResidentFamilyName(e.target.value);
-              }}
-            />
-            <div style={{ display: "flex" }}>
-              <input type="submit" />
-              <button
-                onClick={() => {
-                  setShowResidentForm(false);
-                  setResidentFamilyName("");
-                  setResidentGivenName("");
-                }}
-              >
-                Cancel
-              </button>
-            </div>
-          </form>
-        )}
+        <AttendanceResidentForm />
         <button
           style={{ marginTop: "10px" }}
           onClick={() => {
