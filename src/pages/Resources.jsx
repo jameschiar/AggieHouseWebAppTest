@@ -4,6 +4,8 @@ import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 
+import FAQ from "../components/FAQ";
+
 import NavBar from "../components/NavBar.jsx";
 import './css/Resources.css';
 
@@ -40,6 +42,8 @@ export default function Resources() {
     setValue(newValue);
   };
 
+  //const { faq } = useFAQ();
+
   return (
     <main>
     <NavBar/>
@@ -64,6 +68,11 @@ export default function Resources() {
       </TabPanel>
       <TabPanel value={value} index={2}>
         FAQs
+        {/*
+        {faqs.map((faq, key) => {
+          return <FAQInfo faq={faq} key={key} />;
+        })}
+        */}
       </TabPanel>
       <TabPanel value={value} index={3}>
         Guide Videos
