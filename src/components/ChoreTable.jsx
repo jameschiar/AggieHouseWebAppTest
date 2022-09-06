@@ -4,12 +4,10 @@ import React from "react";
 import { doc, updateDoc, deleteDoc } from "@firebase/firestore";
 import { db } from "../firebase-config";
 
-//components
-// import { AttendanceNotesForm } from "./AttendanceNotesForm";
+// components
 import ChoreStatusButton from "./ChoreStatusButton";
 
-const ChoreTable = ({ choreData, deleteState }) => {
-
+const ChoreTable = ({ choreData }) => {
   return (
     <div className="chore-sheet">
       <table>
@@ -23,25 +21,19 @@ const ChoreTable = ({ choreData, deleteState }) => {
             <th>Saturday</th>
             <th>Sunday</th>
           </tr>
-
-          {choreData?.map((val, key) => {
-            return (
-                <td key={key}>
-                  {val.chore}
-                </td>
-            );
-          })}
           <tr>
-          {choreData?.map((val, key) => {
-            return (
-                <td>
-                  <ChoreStatusButton
-                    chore={val}
-                    status={"done"}
-                  />
+            {choreData?.map((val, key) => {
+              return <td key={key}>{val.chore}</td>;
+            })}
+          </tr>
+          <tr>
+            {choreData?.map((val, key) => {
+              return (
+                <td key={key}>
+                  <ChoreStatusButton chore={val} status={"done"} />
                 </td>
-            );
-          })}
+              );
+            })}
           </tr>
         </tbody>
       </table>

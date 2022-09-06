@@ -14,7 +14,6 @@ function ManageUsers() {
           return <UserInfo user={user} key={key} />;
         })}
       </div>
-      <button>Add User maybe</button>
     </div>
   );
 }

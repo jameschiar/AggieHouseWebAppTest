@@ -1,28 +1,12 @@
 import React, { useState, useCallback, useEffect, useRef } from "react";
-import NavBar from "../components/NavBar.jsx";
-import ChoreTable from "../components/ChoreTable.jsx";
+import ChoreTable from "./ChoreTable.jsx";
 
 import { db } from "../firebase-config.js";
-import {
-  collection,
-  doc,
-  updateDoc,
-  addDoc,
-  onSnapshot,
-  deleteDoc,
-} from "firebase/firestore";
-
-import { Calendar, Views, momentLocalizer } from "react-big-calendar";
-import moment from "moment";
-import withDragAndDrop from "react-big-calendar/lib/addons/dragAndDrop";
-
+import { collection, onSnapshot } from "firebase/firestore";
 // import 'react-big-calendar/lib/css/react-big-calendar.css';
 import "react-big-calendar/lib/addons/dragAndDrop/styles.css";
-import "./css/Todo.css";
-import MealsCalendar from "../components/MealsCalendar.jsx";
-import Chores from "../components/Chores.jsx";
 
-function Todo() {
+function Chores() {
   const [isBusy, setBusy] = useState(true);
   const [showChoreForm, setShowChoreForm] = useState(false);
   const [statusData, setStatusData] = useState([]);
@@ -82,11 +66,16 @@ function Todo() {
 
   return (
     <div>
-      <NavBar />
-      <MealsCalendar />
-      <Chores />
+      <div>
+        <h1 className="chores-header"> Chores </h1>
+      </div>
+      {!isBusy && (
+        <div>
+          <ChoreTable choreData={statusData} />
+        </div>
+      )}
     </div>
   );
 }
 
-export default Todo;
+export default Chores;
