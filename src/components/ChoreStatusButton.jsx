@@ -2,15 +2,11 @@ import React from "react";
 import { doc, updateDoc } from "@firebase/firestore";
 import { db } from "../firebase-config";
 
-const ChoreStatusButton = ({ chore, status }) => {
+const ChoreStatusButton = ({ chore }) => {
   // clicking in the boxes will display "X" or nothing
   const updateButton = async () => {
-    if (status == true)
-      status = false
-    if (status == false)
-      status = true
     const choreDocRef = doc(db, "chores", chore.id);
-    const newFields = { status: status };
+    const newFields = { done: !chore.done };
     await updateDoc(choreDocRef, newFields);
   };
 
@@ -21,13 +17,9 @@ const ChoreStatusButton = ({ chore, status }) => {
         updateButton();
       }}
     >
-      {chore.status ? "X" : ""}
-      
+      {chore.done === true && "X"}
     </button>
   );
 };
 
 export default ChoreStatusButton;
-
-
-// chore.status === status && 

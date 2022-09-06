@@ -1,60 +1,53 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./css/Locker.css";
 import NavBar from "../components/NavBar.jsx";
 
-import { db } from '../firebase-config.js';
-import { collection, doc, updateDoc, getDocs, addDoc, onSnapshot, deleteDoc } from 'firebase/firestore';
+import { db } from "../firebase-config.js";
+import { doc, updateDoc, collection, getDocs } from "firebase/firestore";
 
 function Lock() {
+  const [randomNum, setRandomNum] = useState(1111);
 
-    const [randomNum, setRandomNum] = useState(1111);
-  
-    const handleRandomNum = () => {
-      setRandomNum(Math.floor(1000 + Math.random() * 9000));
-      console.log('New Locker Code Generated:', setRandomNum);
-    };
+  useEffect(() => {
+    getDocs(collection(db, "codes")).then((snapShot) => {
+      console.log(snapShot);
+    });
+  }, []);
 
-    const manualNum = event => {
-        setRandomNum(event.target.value);
-        console.log('New Locker Code Set:', event.target.value);
-    }
-//below this idk it doesnt work yet
-    const uploadCode = {
-        //console.log('Code uploaded to Firebase');
-    }
+  const handleRandomNum = () => {
+    setRandomNum(Math.floor(1000 + Math.random() * 9000));
+  };
 
-    const updateCode = async (id, combination) => {
-    const userDoc = doc(db, "codes", Tf36EFl7pRAiJo9YC10j);
+  const setManualNum = (event) => {
+    setRandomNum(event.target.value);
+    console.log("New Locker Code Set:", event.target.value);
+  };
+
+  const updateCode = async () => {
+    const code = doc(db, "codes", "Tf36EFl7pRAiJo9YC10j");
     const newFields = { combination: randomNum };
-    await updateDoc(userDoc, newFields);
+    await updateDoc(code, newFields);
   };
 
-  const createCode = async () => {
-    await addDoc(codes, { combination: Number(randomNum) });
-  };
-  // above this doesnt work yet
-
-
-  
-  
-    return (
-      <main>
-        <NavBar />
+  return (
+    <main>
+      <NavBar />
+      <div>
+        Locker Code:
+        <input
+          type="number"
+          id="Lock Code"
+          name="Lock Code"
+          onChange={setManualNum}
+          value={randomNum}
+          max="9999"
+        />
         <div>
-            Locker Code:
-            <input
-                type="code"
-                id="Lock Code"
-                name="Lock Code"
-                onChange={manualNum}
-                value={randomNum}
-            />
-            <div>
-                <button onClick={handleRandomNum}>Generate New Code</button>
-                <button onClick={createCode}>Save New Code</button>
-          </div>
+          <button onClick={handleRandomNum}>Generate New Code</button>
+          <button onClick={updateCode}>Save New Code</button>
         </div>
-      </main>
-    );
-  }
+      </div>
+    </main>
+  );
+}
 export default Lock;

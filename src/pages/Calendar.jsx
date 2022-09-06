@@ -8,7 +8,6 @@ import {
   collection,
   doc,
   updateDoc,
-  getDocs,
   addDoc,
   onSnapshot,
   deleteDoc,
@@ -35,7 +34,7 @@ function showCalendar() {
   const { userFirebaseData } = useUser();
 
   const isAdmin = () => {
-    return userFirebaseData?.role === "admin"
+    return userFirebaseData?.role === "admin";
   };
 
   useEffect(() => {
@@ -104,7 +103,7 @@ function showCalendar() {
       await deleteDoc(eventDoc);
     }
   };
-  
+
   const slotSelection = useCallback(
     ({ start, end }) => {
       if (isAdmin()) {

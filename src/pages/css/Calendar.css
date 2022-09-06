@@ -1,5 +1,5 @@
 .calendar-container {
-  background-color: #BBAB9D;
+  background-color: #bbab9d;
   height: 400pt;
   padding: 20px;
   width: auto;
@@ -7,7 +7,7 @@
   margin-top: 10px;
 }
 
-.calendar-header{
+.calendar-header {
   font-family: poppins;
   font-weight: 450;
   color: #545454;
@@ -15,44 +15,45 @@
   margin-top: 50px;
 }
 
-.modal-show{
+.modal-show {
   display: block;
   margin-top: 50px;
   margin-bottom: 40px;
   font-family: poppins;
   text-align: center;
+  padding-bottom: 50px;
 }
 
-.modal-hide{
+.modal-hide {
   display: none;
 }
 
-.modalTitle{
+.modalTitle {
   font-weight: 450;
   color: #545454;
   font-size: 28px;
 }
 
-.modalNotes{
+.modalNotes {
   margin-top: 15px;
   font-weight: 350;
   font-size: 20px;
 }
 
-.modalBody{
+.modalBody {
   margin-top: 15px;
   font-weight: 350;
   font-size: 20px;
 }
 
-.modalFooter{
+.modalFooter {
   margin-top: -10px;
 }
 
-.closeModal{
+.closeModal {
   font-size: 16px;
   font-weight: 300;
-  background-color: #FAF9F8;
+  background-color: #faf9f8;
   color: #545454;
   width: 125px;
   height: 30px;
@@ -61,10 +62,10 @@
   margin-right: 80px;
 }
 
-.modalDelete{
+.modalDelete {
   font-size: 16px;
   font-weight: 300;
-  background-color: #FAF9F8;
+  background-color: #faf9f8;
   color: #545454;
   width: 125px;
   height: 30px;
@@ -72,10 +73,10 @@
   border: none;
 }
 
-.modalSubmit{
+.modalSubmit {
   font-size: 12px;
   font-weight: 300;
-  background-color: #FAF9F8;
+  background-color: #faf9f8;
   color: #545454;
   width: 100px;
   height: 20px;

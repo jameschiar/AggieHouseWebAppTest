@@ -1,20 +1,17 @@
 import React, { useState, useCallback, useEffect, useRef } from "react";
-import NavBar from "../components/NavBar.jsx";
+import ChoreTable from "./ChoreTable.jsx";
 
 import { db } from "../firebase-config.js";
 import { collection, onSnapshot } from "firebase/firestore";
-
 // import 'react-big-calendar/lib/css/react-big-calendar.css';
 import "react-big-calendar/lib/addons/dragAndDrop/styles.css";
-import "./css/Todo.css";
-import MealsCalendar from "../components/MealsCalendar.jsx";
-import Chores from "../components/Chores.jsx";
 
-function Todo() {
+function Chores() {
   const [isBusy, setBusy] = useState(true);
   const [showChoreForm, setShowChoreForm] = useState(false);
-  const [statusData, setStatusData] = useState([]);
+  const [choreData, setChoreData] = useState([]);
   const [newChore, setNewChore] = useState("");
+  const [deleteState, toggleDeleteState] = useState(false);
 
   const choresCollectionRef = collection(db, "chores");
 
@@ -24,7 +21,7 @@ function Todo() {
     const getChoreData = async () => {
       // onSnapshot listens to firebase for changes
       unsub = onSnapshot(choresCollectionRef, (collection) => {
-        setStatusData(
+        setChoreData(
           collection.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
         );
       });
@@ -33,10 +30,10 @@ function Todo() {
     setBusy(false);
 
     // useEffect cleanup function
-    // return () => {
-    //   unsub(); // disable onSnapshot
-    //   setBusy(true);
-    // };
+    return () => {
+      unsub(); // disable onSnapshot
+      setBusy(true);
+    };
   }, []);
 
   // add resident to table
@@ -59,7 +56,7 @@ function Todo() {
 
   //   // reset values and close form
   //   setNewChore("");
-  //   setShowChoreForm(false);
+  //   set3ChoreForm(false);
   // };
 
   const cancelForm = () => {
@@ -69,11 +66,16 @@ function Todo() {
 
   return (
     <div>
-      <NavBar />
-      <MealsCalendar />
-      <Chores />
+      <div>
+        <h1 className="chores-header"> Chores </h1>
+      </div>
+      {!isBusy && (
+        <div>
+          <ChoreTable choreData={choreData} />
+        </div>
+      )}
     </div>
   );
 }
 
-export default Todo;
+export default Chores;
