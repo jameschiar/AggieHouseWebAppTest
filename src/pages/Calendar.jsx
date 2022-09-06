@@ -70,7 +70,7 @@ function showCalendar() {
         <div className="modalBody">
           Start Time: {moment(selectedEvent.start).format("hh:mm a")} on
           {moment(selectedEvent.start).format("MMMM d, YYYY")} <br />
-          End Time: {moment(selectedEvent.end).format("hh:mm a")} on
+          End Time: {moment(selectedEvent.end).format("hh:mm a")} on 
           {moment(selectedEvent.end).format("MMMM d, YYYY")} <br />
         </div>
         <br />

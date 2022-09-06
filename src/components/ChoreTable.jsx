@@ -37,7 +37,7 @@ const ChoreTable = ({ choreData, deleteState }) => {
                 <td>
                   <ChoreStatusButton
                     chore={val}
-                    status={"done"}
+                    status={val.status}
                   />
                 </td>
             );

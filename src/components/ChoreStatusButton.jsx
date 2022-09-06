@@ -5,6 +5,10 @@ import { db } from "../firebase-config";
 const ChoreStatusButton = ({ chore, status }) => {
   // clicking in the boxes will display "X" or nothing
   const updateButton = async () => {
+    if (status == true)
+      status = false
+    if (status == false)
+      status = true
     const choreDocRef = doc(db, "chores", chore.id);
     const newFields = { status: status };
     await updateDoc(choreDocRef, newFields);
@@ -17,9 +21,13 @@ const ChoreStatusButton = ({ chore, status }) => {
         updateButton();
       }}
     >
-      {chore.status === status && "X"}
+      {chore.status ? "X" : ""}
+      
     </button>
   );
 };
 
 export default ChoreStatusButton;
+
+
+// chore.status === status && 

@@ -164,7 +164,7 @@ function Todo() {
   console.log(myMeals);
 
   // *********************************************************************************************
-  //                              Chores code mainly begins here
+  //                              Chores code begins here
   // *********************************************************************************************
 
   const [isBusy, setBusy] = useState(true);
@@ -190,10 +190,10 @@ function Todo() {
     setBusy(false);
 
     // useEffect cleanup function
-    return () => {
-      unsub(); // disable onSnapshot
-      setBusy(true);
-    };
+    // return () => {
+    //   unsub(); // disable onSnapshot
+    //   setBusy(true);
+    // };
   }, []);
 
   // add resident to table
