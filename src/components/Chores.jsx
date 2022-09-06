@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import ChoreTable from "./ChoreTable.jsx";
 
 import { db } from "../firebase-config.js";
@@ -11,7 +11,6 @@ function Chores() {
   const [showChoreForm, setShowChoreForm] = useState(false);
   const [choreData, setChoreData] = useState([]);
   const [newChore, setNewChore] = useState("");
-  const [deleteState, toggleDeleteState] = useState(false);
 
   const choresCollectionRef = collection(db, "chores");
 
