@@ -9,7 +9,7 @@ import "react-big-calendar/lib/addons/dragAndDrop/styles.css";
 function Chores() {
   const [isBusy, setBusy] = useState(true);
   const [showChoreForm, setShowChoreForm] = useState(false);
-  const [statusData, setStatusData] = useState([]);
+  const [choreData, setChoreData] = useState([]);
   const [newChore, setNewChore] = useState("");
   const [deleteState, toggleDeleteState] = useState(false);
 
@@ -21,7 +21,7 @@ function Chores() {
     const getChoreData = async () => {
       // onSnapshot listens to firebase for changes
       unsub = onSnapshot(choresCollectionRef, (collection) => {
-        setStatusData(
+        setChoreData(
           collection.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
         );
       });
@@ -56,7 +56,7 @@ function Chores() {
 
   //   // reset values and close form
   //   setNewChore("");
-  //   setShowChoreForm(false);
+  //   set3ChoreForm(false);
   // };
 
   const cancelForm = () => {
@@ -71,7 +71,7 @@ function Chores() {
       </div>
       {!isBusy && (
         <div>
-          <ChoreTable choreData={statusData} />
+          <ChoreTable choreData={choreData} />
         </div>
       )}
     </div>

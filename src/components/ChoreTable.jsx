@@ -1,9 +1,5 @@
 import React from "react";
 
-// firestore
-import { doc, updateDoc, deleteDoc } from "@firebase/firestore";
-import { db } from "../firebase-config";
-
 // components
 import ChoreStatusButton from "./ChoreStatusButton";
 
@@ -30,7 +26,7 @@ const ChoreTable = ({ choreData }) => {
             {choreData?.map((val, key) => {
               return (
                 <td key={key}>
-                  <ChoreStatusButton chore={val} status={"done"} />
+                  <ChoreStatusButton chore={val} />
                 </td>
               );
             })}
