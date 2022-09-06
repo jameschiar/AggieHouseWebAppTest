@@ -1,7 +1,4 @@
 import React, { useState, useCallback, useEffect, useRef } from "react";
-import NavBar from "../components/NavBar.jsx";
-import ChoreTable from "../components/ChoreTable.jsx";
-
 import { db } from "../firebase-config.js";
 import {
   collection,
@@ -136,7 +133,7 @@ function MealsCalendar() {
         };
         addMeal();
       } else {
-        // display error
+        console.error("Empty title");
       }
     },
     [setMeals]
