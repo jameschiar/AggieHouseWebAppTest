@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 
-import { db } from "../firebase-config";
+import { db, storage } from "../firebase-config";
 import { deleteDoc, doc, updateDoc } from "@firebase/firestore";
+
+import { deleteObject, getDownloadURL, ref } from "firebase/storage";
 
 import "./css/UserInfo.css";
 
@@ -12,6 +14,7 @@ function UserInfo({ user }) {
   const [newRole, setNewRole] = useState("user");
   const [numberSubmittedMsg, setNumberSubmittedMsg] = useState("");
   const [roleSubmittedMsg, setRoleSubmittedMsg] = useState("");
+  const [userDeletedMsg, setUserDeletedMsg] = useState("");
 
   const submitNumber = async (e) => {
     e.preventDefault();
@@ -25,8 +28,23 @@ function UserInfo({ user }) {
     setRoleSubmittedMsg("Role submitted!");
   };
 
+  // deletes user from database, removes pfp from storage
   const deleteUser = async () => {
     await deleteDoc(doc(db, "users", user.id));
+    try {
+      const oldImageRef = ref(storage, user.photoURL);
+      deleteObject(oldImageRef)
+        .then(() => {
+          console.log("image delete success");
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } catch (err) {
+      console.log(err);
+    }
+    // set delete success message
+    setUserDeletedMsg("User Deleted!");
   };
 
   const confirmDelete = () => {
@@ -108,6 +126,7 @@ function UserInfo({ user }) {
           <button style={{ color: "#FF0000" }} onClick={confirmDelete}>
             Delete User
           </button>
+          {userDeletedMsg && <span>{userDeletedMsg}</span>}
         </div>
       )}
     </div>
