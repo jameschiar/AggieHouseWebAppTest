@@ -1,13 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 
-import FAQ from "../components/FAQ";
+import FAQInfo from "../components/FAQ";
 
 import NavBar from "../components/NavBar.jsx";
 import './css/Resources.css';
+
+import { doc, updateDoc, deleteDoc } from "@firebase/firestore";
+import { db } from "../firebase-config";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -37,12 +40,11 @@ function a11yProps(index) {
 
 export default function Resources() {
   const [value, setValue] = React.useState(0);
+  const [deleteState, toggleDeleteState] = useState(false);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-
-  //const { faq } = useFAQ();
 
   return (
     <main>
@@ -57,7 +59,7 @@ export default function Resources() {
           <Tab label="Board" {...a11yProps(0)} />
           <Tab label="Resources" {...a11yProps(1)} />
           <Tab label="FAQs" {...a11yProps(2)} />
-          <Tab label="App Help" {...a11yProps(3)} />
+          <Tab label="Tutorials" {...a11yProps(3)} />
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}>
@@ -65,17 +67,25 @@ export default function Resources() {
       </TabPanel>
       <TabPanel value={value} index={1}>
         Resources
+        Could rename to "Helpful Links" or "Links"? bc resources seems repetitive
+        
+        
       </TabPanel>
       <TabPanel value={value} index={2}>
-        FAQs
-        {/*
-        {faqs.map((faq, key) => {
-          return <FAQInfo faq={faq} key={key} />;
-        })}
-        */}
+        <h2>FAQs</h2>
+        <FAQInfo 
+            deleteState={deleteState}
+          />
+         <button
+          style={{ marginTop: "5px" }}
+          onClick={() => {
+            toggleDeleteState(!deleteState);
+          }}>
+          Delete FAQ
+        </button>
       </TabPanel>
       <TabPanel value={value} index={3}>
-        Guide Videos
+        For videos to use the website and other common 'how-to's
       </TabPanel>
     </Box>
     </main>
