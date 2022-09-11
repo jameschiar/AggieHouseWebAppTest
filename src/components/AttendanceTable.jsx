@@ -16,7 +16,7 @@ const AttendanceTable = ({ attendanceData, deleteState }) => {
   return (
     <div className="attendance-sheet">
       <table>
-        <tbody>
+        <thead>
           <tr>
             <th>Resident Name</th>
             <th>Present</th>
@@ -24,7 +24,8 @@ const AttendanceTable = ({ attendanceData, deleteState }) => {
             <th>Unexcused Absence</th>
             <th>Notes</th>
           </tr>
-
+        </thead>
+        <tbody>
           {attendanceData?.map((val, key) => {
             return (
               <tr key={key}>

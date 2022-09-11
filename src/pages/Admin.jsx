@@ -1,8 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import NavBar from "../components/NavBar";
-import { Outlet, useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { Outlet, Link } from "react-router-dom";
 
 function Admin() {
   return (

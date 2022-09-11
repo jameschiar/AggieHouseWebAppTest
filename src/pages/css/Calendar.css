@@ -1,6 +1,6 @@
 .calendar-container {
   background-color: #bbab9d;
-  height: 400pt;
+  height: 500pt;
   padding: 20px;
   width: auto;
   margin: 10%;
@@ -15,7 +15,7 @@
   margin-top: 50px;
 }
 
-.modal-show {
+.modal {
   display: block;
   margin-top: 50px;
   margin-bottom: 40px;
@@ -24,11 +24,10 @@
   padding-bottom: 50px;
 }
 
-.modal-hide {
-  display: none;
-}
-
 .modalTitle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-weight: 450;
   color: #545454;
   font-size: 28px;
@@ -41,28 +40,24 @@
 }
 
 .modalBody {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   margin-top: 15px;
   font-weight: 350;
   font-size: 20px;
 }
 
 .modalFooter {
+  display: flex;
+  justify-content: space-evenly;
+  max-width: 500px;
   margin-top: -10px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-.closeModal {
-  font-size: 16px;
-  font-weight: 300;
-  background-color: #faf9f8;
-  color: #545454;
-  width: 125px;
-  height: 30px;
-  border-radius: 50px;
-  border: none;
-  margin-right: 80px;
-}
-
-.modalDelete {
+.modalButton {
   font-size: 16px;
   font-weight: 300;
   background-color: #faf9f8;
@@ -82,4 +77,40 @@
   height: 20px;
   border-radius: 50px;
   border: none;
+}
+
+#display-times {
+  display: flex;
+  flex-direction: column;
+}
+
+.delete-add-button {
+  border-width: thin;
+  border-color: black;
+  border-radius: 20px;
+  margin-left: 10px;
+}
+
+.justify-align-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.calendar-edit-button {
+  width: 30px;
+  height: 30px;
+  margin-left: 5px;
+  border: none;
+  background-color: #e8e2dc;
+}
+
+.assigned-volunteers {
+}
+
+.volunteers {
+  display: flex;
+  justify-content: space-around;
+  max-width: 500px;
+  width: 100%;
 }
