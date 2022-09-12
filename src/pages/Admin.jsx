@@ -13,6 +13,9 @@ function Admin() {
       <Link to="/lock">
         <button>Manage Locker Code</button>
       </Link>
+      <Link to="/alerts">
+        <button>Manage Alerts</button>
+      </Link>
       <Outlet />
     </div>
   );

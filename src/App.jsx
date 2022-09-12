@@ -17,6 +17,7 @@ import ShowCalendar from "./pages/Calendar";
 import Todo from "./pages/Todo";
 import Unauthorized from "./pages/Unauthorized";
 import Lock from "./pages/Locker";
+import Alerts from "./pages/Alerts"
 
 import { Routes, Route } from "react-router-dom";
 
@@ -37,6 +38,7 @@ function App() {
           <Route path="resources" element={<Resources />}></Route>
           <Route path="account" element={<Account />}></Route>
           <Route path="lock" element={<Lock />}></Route>
+          <Route path="alerts" element={<Alerts />}></Route>
         </Route>
 
         <Route element={<RequireAuth allowedRoles={["admin"]} />}>
