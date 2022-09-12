@@ -27,10 +27,11 @@ class SMSIndividual extends Component {
     }
     return (
       <main> 
+        
+          <h2> Send Text Message to a Volunteer</h2>
         <a href="https://replit.com/join/ciomwotuwj-darrenanimo">join link for replit server</a>
         <div></div>
           <a href="https://replit.com/@darrenanimo/ExpressServer#index.js">For now to use make sure this replit server is running</a>
-          <h2> Send Text Message to a Volunteer</h2>
         <h3>method to choose volunteer should be dif</h3>
           <label> Your Phone Number (ex: +19166477953)</label>
           <br />
