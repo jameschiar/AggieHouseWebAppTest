@@ -22,6 +22,8 @@ function MealsCalendar() {
 
   // Variables for the Meals Calendar
   const [modalState, setModalState] = useState(false);
+  const [newLink, setNewLink] = useState(false);
+  const [addLink, toggleAddLink] = useState(false);
   const [selectedMeal, setSelectedMeal] = useState(undefined);
   const [myMeals, setMeals] = useState([]);
   const mealsCollectionRef = collection(db, "meals");
@@ -41,6 +43,7 @@ function MealsCalendar() {
             start: doc.data().start.toDate(),
             end: doc.data().end.toDate(),
             ingredients: doc.data().ingredients,
+            link: doc.data().link,
           }))
         );
       });
@@ -66,6 +69,17 @@ function MealsCalendar() {
       await updateDoc(mealDoc, newFields);
     };
 
+    const addNewLink = async (id) => {
+
+      if (newLink.length == 0) {
+        alert("Cannot submit empty link");
+        return;
+      }
+      const mealDoc = doc(db, "meals");
+      const newFields = { link: newLink };
+      await updateDoc(mealDoc, newFields);
+    }
+
     return (
       <div className={`modal-${modalState == true ? "show" : "hide"}`}>
         <div className="modalTitle">{selectedMeal.title}</div>
@@ -82,12 +96,13 @@ function MealsCalendar() {
             className="modalSubmit"
             onClick={() => {
               updateIngredients(selectedMeal.id, selectedMeal.ingredients);
-              setModalState(true);
+              setModalState(false);
             }}
           >
             Submit
           </button>
         </div>
+        <div className="modalBody">Link to Recipe: <a href='https://docs.google.com/document/d/1UgGepZqLtNeteT1KAp5mIkjRnSpaI7ZYDQDe373sTHY/edit' target="_blank"> {selectedMeal.title} </a></div>
         <br />
         <div className="modalFooter">
           <button
@@ -128,7 +143,8 @@ function MealsCalendar() {
             title: title,
             start: start,
             end: end,
-            notes: "",
+            ingredients: "",
+            link: "",
           });
         };
         addMeal();
@@ -138,23 +154,6 @@ function MealsCalendar() {
     },
     [setMeals]
   );
-
-  // const moveMeal = useCallback(
-  //   ({ meal, start, end, isAllDay: droppedOnAllDaySlot = false }) => {
-  //     const { allDay } = meal
-  //     if( !allDay && droppedOnAllDaySlot) {
-  //       meal.allday = true
-  //     }
-  //     console.log(start, end)
-
-  //     const updateMeal = async () => {
-  //       await updateDoc(doc(db, "meals", meal.id), {start: start, end: end})
-  //     }
-  //     updateMeal();
-
-  //   },
-  //   [setMeals]
-  // )
 
   console.log(myMeals);
 
