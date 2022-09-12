@@ -6,14 +6,14 @@ import { collection, deleteDoc, doc, updateDoc, onSnapshot } from "@firebase/fir
 function ResourceLinks() {
   const [linksData, setLinksData] = useState([]);
 
-  const FAQsCollectionRef = collection(db, "faqs");
+  const linksCollectionRef = collection(db, "resourceLinks");
 
   useEffect(() => {
 
     let unsub;
-    const getFAQs = async () => {
+    const getLinks = async () => {
       // onSnapshot listens to firebase for changes
-      unsub = onSnapshot(FAQsCollectionRef, (collection) => {
+      unsub = onSnapshot(linksCollectionRef, (collection) => {
         setFAQData(
           collection.docs.map((doc) => ({ id: doc.id, Question: doc.data().Question, Answer: doc.data().Answer }))
         );

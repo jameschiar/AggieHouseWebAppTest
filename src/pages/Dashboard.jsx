@@ -5,9 +5,12 @@ import { Link } from "react-router-dom";
 import events from "../data/events";
 import moment from "moment";
 import { useUser } from "../context/UserProvider.jsx";
+import DashAlerts from "../components/DashAlerts.jsx";
+
 
 function Dashboard() {
   const { user } = useUser();
+
 
   const DATE_OPTIONS = {
     weekday: "short",
@@ -45,7 +48,9 @@ function Dashboard() {
         </h3>
         <h4 className="modules">
           Alerts
-          <p className="info">alerts imported here</p>
+          <p className="info">
+            <DashAlerts/>
+          </p>
         </h4>
         <h4 className="modules">
           Available Shifts

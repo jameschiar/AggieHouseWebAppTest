@@ -33,7 +33,7 @@ main {
   height: 100px;
   margin-left: auto;
   margin-right: auto;
-  padding-top: 10px;
+  padding-top: 5px;
   padding-left: 20px;
   border-radius: 20px;
   background-color: #FAF9F8;
@@ -41,7 +41,7 @@ main {
 }
 
 .info {
-  margin-top: 10px;
+  margin-top: 0px;
   font-size: 15px;
   font-weight: 375;
 }
