@@ -19,10 +19,8 @@ import Unauthorized from "./pages/Unauthorized";
 import Lock from "./pages/Locker";
 
 import { Routes, Route } from "react-router-dom";
-import { useUser } from "./context/UserProvider";
 
 function App() {
-  const { userFirebaseData } = useUser();
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
