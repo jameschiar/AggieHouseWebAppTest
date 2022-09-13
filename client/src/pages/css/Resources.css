@@ -1,6 +1,6 @@
 main {
-    background-color: #E8E2DC;
-  }
+  background-color: #e8e2dc;
+}
 
 .body {
   font-family: poppins;
@@ -60,6 +60,6 @@ main {
   color: #6d6464;
 }
 
-.link: hover{
+.link: hover {
   color: black;
 }

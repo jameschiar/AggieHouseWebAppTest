@@ -1,8 +1,11 @@
 #navbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  background-color:#FAF9F8;
+  background-color: #faf9f8;
 }
 
 img#logo {
@@ -14,7 +17,7 @@ img#logo {
 .nav-links {
   font-size: 22px;
   font-weight: 300;
-  background-color: #E8E2DC;
+  background-color: #e8e2dc;
   color: #545454;
   width: 125px;
   height: 50px;
@@ -51,19 +54,19 @@ img#logo {
   font-weight: 300;
 }
 
-.account > a:link{
+.account > a:link {
   text-decoration: none;
   color: #545454;
 }
 
-.account > a:visited{
+.account > a:visited {
   color: #545454;
 }
 
 #pfp {
   margin-top: 10px;
-  width:50px;
-  height:50px;
-  border-radius:25px;
+  width: 50px;
+  height: 50px;
+  border-radius: 25px;
   object-fit: cover;
 }

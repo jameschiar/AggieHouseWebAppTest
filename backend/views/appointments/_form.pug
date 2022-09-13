@@ -1,0 +1,34 @@
+.form-group
+  label.col-sm-4.control-label(for='inputName') Name *
+  .col-sm-8
+    input#inputName.form-control(type='text', name='name', placeholder='Name', required='', data-parsley-maxlength='20', data-parsley-maxlength-message="This field can't have more than 20 characters", value=appointment.name)
+    em The person who receives the notification. We can set this up as a dropdown menu with names from the firebase hopefully
+.form-group
+  label.col-sm-4.control-label(for='inputPhoneNumber') Phone Number *
+  .col-sm-8
+    input#inputPhoneNumber.form-control(type='tel', name='phoneNumber', placeholder='Phone Number', required='', value=appointment.phoneNumber)
+    em The phone number of the person who receives the notification. We can hopefully just pull this fromn the firebase based on the name selected above
+.form-group
+  label.col-sm-4.control-label(for='time') Shift Date
+  .col-sm-8
+    input#inputDate.form-control(type='text', name='time', placeholder='Pick a Date', required='', value=moment(appointment.time).format('YYYY-MM-DD hh:mma'))
+    em The date and time of the shift.
+.form-group
+  label.col-sm-4.control-label(for='selectNotification') Notification Time *
+  .col-sm-8
+    select#selectDelta.form-control(name='notification', required='', value=appointment.notification)
+      option(selected=appointment.notification == '', value='') Send alert before
+      option(selected=appointment.notification == '2', value='2') 2 minutes before
+      option(selected=appointment.notification == '15', value='15') 15 minutes before
+      option(selected=appointment.notification == '30', value='30') 30 minutes before
+      option(selected=appointment.notification == '45', value='45') 45 minutes before
+      option(selected=appointment.notification == '60', value='60') 60 minutes before
+    em Send notification this long before shift. Can edit the values here or may change to send the notifications at a specified time
+.form-group
+  label.col-sm-4.control-label(for='selectTimeZone') Time Zone
+  .col-sm-8
+    select#selectTimeZone.form-control(name='timeZone', required='', value=appointment.timeZone)
+      each zone in timeZones
+        option()
+        option(selected=zone == appointment.timeZone, value= zone) !{zone}
+    em The time zone of the person who receives the notification. This selection will be deleted to default to America/Los_Angeles

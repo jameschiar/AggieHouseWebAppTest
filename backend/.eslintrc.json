@@ -1,0 +1,6 @@
+SS{
+  "extends": ["google", "plugin:prettier/recommended"],
+  "parserOptions": {
+    "ecmaVersion": 8
+  }
+}
