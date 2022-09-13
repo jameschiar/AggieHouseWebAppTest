@@ -15,6 +15,7 @@ import withDragAndDrop from "react-big-calendar/lib/addons/dragAndDrop";
 
 // import 'react-big-calendar/lib/css/react-big-calendar.css';
 import "react-big-calendar/lib/addons/dragAndDrop/styles.css";
+import "../pages/css/Todo.css"
 
 function MealsCalendar() {
   const localizer = momentLocalizer(moment);
@@ -84,9 +85,10 @@ function MealsCalendar() {
       <div className={`modal-${modalState == true ? "show" : "hide"}`}>
         <div className="modalTitle">{selectedMeal.title}</div>
         <div className="modalBody">Ingredients: {selectedMeal.ingredients}</div>
-        <div className="modalNotes">
+        <div className="modalBody">
           Add Ingredients:{" "}
           <input
+            className='inputText'
             placeholder="Ex: Rice"
             onChange={(e) => {
               setIngredients(e.target.value);

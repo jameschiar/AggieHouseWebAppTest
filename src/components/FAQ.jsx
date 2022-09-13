@@ -3,6 +3,8 @@ import React, { useState, useEffect } from "react";
 import { db } from "../firebase-config";
 import { collection, deleteDoc, doc, updateDoc, addDoc, onSnapshot } from "@firebase/firestore";
 
+import "../pages/css/Resources.css";
+
 const FAQInfo = ({ deleteState }) => {
   // const [edit, toggleEdit] = useState(false);
   const [faqData, setFAQData] = useState([]);
@@ -68,15 +70,15 @@ const FAQInfo = ({ deleteState }) => {
   return (
     <div style={{ display: "flex", alignItems: "center" }}>
       
-      <div>
+      <div className="body">
         
       {faqData?.map((faq)=> {
         return (
         <div style={{ marginTop: "10px" }}>
-          <p><b>Q: {faq.Question}</b></p>
+          <h3> Q: {faq.Question} </h3>
           <p><b>A:</b> {faq.Answer} {deleteState && (
           <button
-            style ={{ marginBottom: "10px" }}
+            className='deleteButton'
             onClick={() => {
               if (confirm("Are you sure you want to delete entry " + faq.Question + "?"))
                 deleteFAQ(faq);
@@ -91,7 +93,7 @@ const FAQInfo = ({ deleteState }) => {
         })}
         {!newFAQForm && (
             <button
-              style = {{ marginTop: "7.5px" }}
+              className='addButton'
               onClick={() => {
                 setNewFAQForm(true);
               }}
@@ -103,6 +105,7 @@ const FAQInfo = ({ deleteState }) => {
         <form onSubmit={addFAQ}>
           <input
             autoFocus
+            className='inputText'
             type="text"
             placeholder="Question"
             onChange={(e) => {
@@ -111,14 +114,16 @@ const FAQInfo = ({ deleteState }) => {
           />
           <input
             type = "text"
+            className='inputText'
             placeholder = "Answer"
             onChange={(e) => {
               setNewAnswer(e.target.value);
             }}
             />
           <div style={{display: "flex"}}>
-            <input type = "submit" />
+            <input className="submitButton" type = "submit" />
             <button
+              className='submitButton'
               onClick={() => {
                 setNewFAQForm(false);
                 setNewQuestion("");

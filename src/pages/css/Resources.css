@@ -1,3 +1,65 @@
 main {
     background-color: #E8E2DC;
   }
+
+.body {
+  font-family: poppins;
+  color: #545454;
+}
+
+.contact {
+  font-size: 18px;
+}
+
+.field {
+  margin-left: 15px;
+}
+
+.deleteButton {
+  width: 75px;
+  height: 20px;
+  border-radius: 20px;
+  border: none;
+  margin-left: 20px;
+  font-size: 16px;
+}
+
+.addButton {
+  width: 130px;
+  height: 30px;
+  border-radius: 20px;
+  border: none;
+  font-size: 16px;
+  margin-top: 10px;
+}
+
+.submitButton {
+  width: 75px;
+  height: 25px;
+  border-radius: 20px;
+  border: none;
+  font-size: 16px;
+  margin: 15px;
+}
+
+.inputText {
+  margin-left: 15px;
+  border-radius: 10px;
+  border: 10px;
+  height: 25px;
+  width: 200px;
+}
+
+.list {
+  font-family: poppins;
+  font-size: 24px;
+}
+
+.link {
+  text-decoration: none;
+  color: #6d6464;
+}
+
+.link: hover{
+  color: black;
+}

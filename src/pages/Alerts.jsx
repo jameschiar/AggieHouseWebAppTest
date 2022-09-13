@@ -7,12 +7,23 @@ import AdminDashAlerts from "../components/AdminDashAlerts.jsx";
 
 function Alerts() {
 
+  const [deleteState, toggleDeleteState] = useState(false);
+
 return (
     <main>
       <NavBar/>
       <div style={{ marginLeft: "20px" }}>
         <h2>Edit Dashboard Alerts for All Volunteers</h2>
-        <AdminDashAlerts />
+        <AdminDashAlerts 
+            deleteState={deleteState}
+          />
+        <button
+          style={{ marginTop: "5px" }}
+          onClick={() => {
+            toggleDeleteState(!deleteState);
+          }}>
+          Delete Alert
+        </button>
         <SMSAll/>
          
         <SMSIndividual/>

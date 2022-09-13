@@ -3,6 +3,8 @@ import React, { useState, useEffect } from "react";
 import { db } from "../firebase-config";
 import { collection, deleteDoc, doc, updateDoc, addDoc, onSnapshot } from "@firebase/firestore";
 
+import "../pages/css/Resources.css";
+
 const BoardInfo = ({ deleteState }) => {
   const [boardData, setBoardData] = useState([]);
   const [newName, setNewName] = useState("");
@@ -70,21 +72,18 @@ const BoardInfo = ({ deleteState }) => {
   console.log(boardData);
   
   return (
-    <div style={{ display: "flex", alignItems: "center" }}>
+    <div className='body'>
       
       <div>
         
         
       {boardData?.map((contact)=> {
         return (
-          <div style={{ marginTop: "10px" }}>
+          <div className="contact">
             <h2> {contact.position} </h2>
-          <p><b>Name:</b> {contact.name}</p>
-          <p><b>Position:</b> {contact.position}</p>
-          <p><b>Email:</b> {contact.email}</p>
-          <p><b>Phone Number:</b> {contact.number}{deleteState && (
+          <p><b className="field">Name:</b> {contact.name} <b className="field">Email:</b> {contact.email} <b className="field">Phone Number:</b> {contact.number}{deleteState && (
           <button
-            style ={{ marginBottom: "10px" }}
+            className="deleteButton"
             onClick={() => {
               if (confirm("Are you sure you want to delete entry " + contact.name + "?"))
                 deleteContact(contact);
@@ -99,7 +98,7 @@ const BoardInfo = ({ deleteState }) => {
         })}
         {!newContactForm && (
             <button
-              style = {{ marginTop: "7.5px" }}
+              className='addButton'
               onClick={() => {
                 setNewContactForm(true);
               }}
@@ -111,6 +110,7 @@ const BoardInfo = ({ deleteState }) => {
         <form onSubmit={addContact}>
           <input
             autoFocus
+            className="inputText"
             type="text"
             placeholder="Name"
             onChange={(e) => {
@@ -119,6 +119,7 @@ const BoardInfo = ({ deleteState }) => {
           />
           <input
             type = "text"
+            className="inputText"
             placeholder = "Email"
             onChange={(e) => {
               setNewEmail(e.target.value);
@@ -126,6 +127,7 @@ const BoardInfo = ({ deleteState }) => {
             />
           <input
             type = "text"
+            className="inputText"
             placeholder = "Phone Number"
             onChange={(e) => {
               setNewNumber(e.target.value);
@@ -133,14 +135,16 @@ const BoardInfo = ({ deleteState }) => {
             />
           <input
             type = "text"
+            className="inputText"
             placeholder = "Position"
             onChange={(e) => {
               setNewPosition(e.target.value);
             }}
             />
           <div style={{display: "flex"}}>
-            <input type = "submit" />
+            <input className="submitButton" type = "submit" />
             <button
+              className="submitButton"
               onClick={() => {
                 setNewContactForm(false);
                 setNewName("");

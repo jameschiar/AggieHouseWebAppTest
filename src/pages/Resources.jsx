@@ -48,7 +48,7 @@ export default function Resources() {
   };
 
   return (
-    <main>
+    <main className='body'>
     <NavBar/>
     <Box sx={{ width: '100%' }}>
       <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
@@ -69,7 +69,7 @@ export default function Resources() {
             deleteState={deleteState}
           />
          <button
-          style={{ marginTop: "5px" }}
+          className='addButton'
           onClick={() => {
             toggleDeleteState(!deleteState);
           }}>
@@ -77,15 +77,15 @@ export default function Resources() {
         </button>
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <h2>Resources</h2>
-        <ul>
-          <li><a href="https://docs.google.com/spreadsheets/d/1C7d3nHh5Vp_mPZlKN-Cp2DecNz0HXHlA8MOgs1_bCzo/edit?usp=sharing"> Board Contact Sheet</a></li>
-          <li><a href="https://docs.google.com/spreadsheets/d/1Sw3h6l79ewC8D9s7eooxWIAeIPyGuLxChWd3qHmsD-E/edit?usp=sharing" target='_blank'>Master Roster </a></li>
-           <li><a href="https://docs.google.com/document/d/1UgGepZqLtNeteT1KAp5mIkjRnSpaI7ZYDQDe373sTHY/edit?usp=sharing" target='_blank'>Meals Sheet </a></li>
-           <li><a href="https://docs.google.com/presentation/d/1Na2VB5MG38gW5g7VkvqcPUSZlsfK2kooDZH2wrRs4tc/edit?usp=sharing" target='_blank'>AH Family Introduction Slides </a></li>
-          <li><a href="https://docs.google.com/document/d/1ZENhsKEKpoeRFlOuH768nXXLn6HWmYyiR1xWJHN-8R8/edit?usp=sharing" target='_blank'>Volunteer Operations Guide </a></li>
-          <li><a href="https://forms.gle/RKo4wpBzPet5fZFy5" target='_blank'>Incident Report Form </a></li>
-          <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSeHfaQAC_BwkYkf7RvvvkD5x3lASe4K2kaKvgB0vhc3fiKCsQ/viewform?usp=sf_link" target='_blank'> COVID-19 Report Form </a></li>
+        <h2>Links to Documents in the Aggie House Drive</h2>
+        <ul className='list'>
+          <li><a className='link' href="https://docs.google.com/spreadsheets/d/1C7d3nHh5Vp_mPZlKN-Cp2DecNz0HXHlA8MOgs1_bCzo/edit?usp=sharing"> Board Contact Sheet</a></li>
+          <li><a className='link'  href="https://docs.google.com/spreadsheets/d/1Sw3h6l79ewC8D9s7eooxWIAeIPyGuLxChWd3qHmsD-E/edit?usp=sharing" target='_blank'>Master Roster </a></li>
+           <li><a className='link'  href="https://docs.google.com/document/d/1UgGepZqLtNeteT1KAp5mIkjRnSpaI7ZYDQDe373sTHY/edit?usp=sharing" target='_blank'>Meals Sheet </a></li>
+           <li><a className='link' href="https://docs.google.com/presentation/d/1Na2VB5MG38gW5g7VkvqcPUSZlsfK2kooDZH2wrRs4tc/edit?usp=sharing" target='_blank'>AH Family Introduction Slides </a></li>
+          <li><a className='link' href="https://docs.google.com/document/d/1ZENhsKEKpoeRFlOuH768nXXLn6HWmYyiR1xWJHN-8R8/edit?usp=sharing" target='_blank'>Volunteer Operations Guide </a></li>
+          <li><a className='link' href="https://forms.gle/RKo4wpBzPet5fZFy5" target='_blank'>Incident Report Form </a></li>
+          <li><a className='link'  href="https://docs.google.com/forms/d/e/1FAIpQLSeHfaQAC_BwkYkf7RvvvkD5x3lASe4K2kaKvgB0vhc3fiKCsQ/viewform?usp=sf_link" target='_blank'> COVID-19 Report Form </a></li>
         </ul>
         
         
@@ -96,7 +96,7 @@ export default function Resources() {
             deleteState={deleteState}
           />
          <button
-          style={{ marginTop: "5px" }}
+          className='addButton'
           onClick={() => {
             toggleDeleteState(!deleteState);
           }}>
