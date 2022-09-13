@@ -1,0 +1,70 @@
+{
+  "name": "sample-appointment-reminders-node",
+  "version": "1.0.0",
+  "private": true,
+  "main": "./app.js",
+  "scripts": {
+    "start": "node .",
+    "setup": "configure-env",
+    "pretest": "cross-env NODE_ENV=test",
+    "test": "eslint . && mocha test",
+    "dev": "nodemon ."
+  },
+  "description": "Node implementation of Appointment Reminders",
+  "author": {
+    "name": "Twilio",
+    "email": "open-source@twilio.com"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/twilio-labs/sample-appointment-reminders-node"
+  },
+  "keywords": [
+    "node",
+    "appointment reminders",
+    "twilio",
+    "express",
+    "sms",
+    "notification"
+  ],
+  "engines": {
+    "node": ">=8.x"
+  },
+  "dependencies": {
+    "@firebase/app": "^0.7.31",
+    "@firebase/auth": "^0.20.5",
+    "@firebase/firestore": "^3.4.14",
+    "body-parser": "^1.19.0",
+    "configure-env": "^1.0.0",
+    "cookie-parser": "~1.4.3",
+    "cron": "^1.1.0",
+    "debug": ">=2.6.9",
+    "dotenv-safe": "^4.0.4",
+    "express": "^4.17.1",
+    "firebase": "^9.9.3",
+    "firebase-admin": "^11.0.1",
+    "lowdb": "^1.0.0",
+    "moment": "^2.24.0",
+    "moment-timezone": "^0.5.0",
+    "morgan": "^1.9.1",
+    "npm": "^6.13.4",
+    "pug": "^2.0.0-beta.12",
+    "serve-favicon": "^2.5.0",
+    "twilio": "^3.37.1"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "cheerio": "^0.22.0",
+    "cross-env": "^6.0.3",
+    "eslint": "^6.6.0",
+    "eslint-config-google": "^0.14.0",
+    "eslint-config-prettier": "^6.6.0",
+    "eslint-plugin-prettier": "^3.1.1",
+    "mocha": "^6.2.2",
+    "nodemon": "^1.19.4",
+    "prettier": "^1.19.1",
+    "proxyquire": "^1.7.10",
+    "supertest": "^2.0.1"
+  }
+}
