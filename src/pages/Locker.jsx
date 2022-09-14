@@ -6,40 +6,45 @@ import { db } from "../firebase-config.js";
 import { doc, updateDoc, collection, getDocs } from "firebase/firestore";
 
 function Lock() {
-  const [randomNum, setRandomNum] = useState(1111);
+  const [newCode, setNewCode] = useState(0);
+  const [currCode, setCurrCode] = useState({}); // current code with id
 
   useEffect(() => {
     getDocs(collection(db, "codes")).then((snapShot) => {
-      console.log(snapShot);
+      snapShot.docs.forEach((doc) => {
+        setCurrCode({ ...doc.data(), id: doc.id });
+      });
     });
   }, []);
 
   const handleRandomNum = () => {
-    setRandomNum(Math.floor(1000 + Math.random() * 9000));
+    setNewCode(Math.floor(1000 + Math.random() * 9000));
   };
 
   const setManualNum = (event) => {
-    setRandomNum(event.target.value);
-    console.log("New Locker Code Set:", event.target.value);
+    setNewCode(event.target.value);
   };
 
   const updateCode = async () => {
-    const code = doc(db, "codes", "Tf36EFl7pRAiJo9YC10j");
-    const newFields = { combination: randomNum };
+    const code = doc(db, "codes", currCode.id);
+    const newFields = { combination: newCode };
     await updateDoc(code, newFields);
+    setCurrCode((prev) => ({ ...prev, combination: newCode }));
+    console.log("code updated!");
   };
 
   return (
     <main>
       <NavBar />
       <div>
-        Locker Code:
+        <p>Current locker code: {currCode.combination}</p>
+        <label htmlFor="lock-code">Locker Code:</label>
         <input
           type="number"
-          id="Lock Code"
-          name="Lock Code"
+          id="lock-code"
+          name="lock-code"
           onChange={setManualNum}
-          value={randomNum}
+          value={newCode}
           max="9999"
         />
         <div>
