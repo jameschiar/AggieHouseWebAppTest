@@ -131,8 +131,9 @@ function Attendance() {
       {!isBusy && (
         <>
           <form onSubmit={changeDate}>
-            <label htmlFor="date-picker">View past attendance: </label>
+            <label htmlFor="date-picker" style={{margin: '10px'}}>View past attendance: </label>
             <input
+              className='inputField'
               id="date-picker"
               type="date"
               defaultValue={currentDate()}
@@ -140,7 +141,7 @@ function Attendance() {
               min="2022-01-01"
               max="2100-01-01"
             />
-            <input type="submit" />
+            <input className='submitButton' type="submit" />
           </form>
           <div>
             <h2 style={{ marginLeft: "30px", color: "#545454" }}>{date}</h2>
@@ -169,7 +170,8 @@ function Attendance() {
       <div style={{ display: "flex", flexDirection: "column", width: "130px" }}>
         <AttendanceResidentForm />
         <button
-          style={{ marginTop: "10px" }}
+          className='optionButtons'
+          style={{ marginTop: "5px" }}
           onClick={() => {
             toggleDeleteState(!deleteState);
           }}

@@ -1,8 +1,6 @@
 run="npm run dev"
 entrypoint="src/App.jsx"
 
-
-
 [packager]
 language = "nodejs"
 

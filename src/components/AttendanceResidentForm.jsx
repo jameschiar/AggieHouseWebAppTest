@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { addDoc, collection } from "@firebase/firestore";
 import { db } from "../firebase-config";
+import "../pages/css/Attendance.css"
 
 function AttendanceResidentForm() {
   const [showResidentForm, setShowResidentForm] = useState(false);
@@ -37,6 +38,7 @@ function AttendanceResidentForm() {
     <>
       {!showResidentForm && (
         <button
+          className='optionButtons'
           onClick={() => {
             setShowResidentForm(true);
           }}

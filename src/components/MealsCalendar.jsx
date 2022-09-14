@@ -104,11 +104,11 @@ function MealsCalendar() {
             Submit
           </button>
         </div>
-        <div className="modalBody">Link to Recipe: <a href='https://docs.google.com/document/d/1UgGepZqLtNeteT1KAp5mIkjRnSpaI7ZYDQDe373sTHY/edit' target="_blank"> {selectedMeal.title} </a></div>
+        <div className="modalBody">Link to Recipe Book: <a style={{textDecoration: "none", color: '#545454'}} href='https://docs.google.com/document/d/1UgGepZqLtNeteT1KAp5mIkjRnSpaI7ZYDQDe373sTHY/view' target="_blank"> <b>{selectedMeal.title}</b> </a></div>
         <br />
         <div className="modalFooter">
           <button
-            className="closeModal"
+            className="modalButtons"
             onClick={() => {
               setModalState(false);
             }}
@@ -117,7 +117,8 @@ function MealsCalendar() {
             Cancel{" "}
           </button>
           <button
-            className="modalDelete"
+            className="modalButtons"
+            style = {{marginLeft:"-15%"}}
             onClick={() => {
               deleteMeal(selectedMeal.id);
               setModalState(false);
