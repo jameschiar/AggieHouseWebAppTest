@@ -7,10 +7,8 @@ import moment from "moment";
 import { useUser } from "../context/UserProvider.jsx";
 import DashAlerts from "../components/DashAlerts.jsx";
 
-
 function Dashboard() {
   const { user } = useUser();
-
 
   const DATE_OPTIONS = {
     weekday: "short",
@@ -48,9 +46,9 @@ function Dashboard() {
         </h3>
         <h4 className="modules">
           Alerts
-          <p className="info">
-            <DashAlerts/>
-          </p>
+          <div className="info">
+            <DashAlerts />
+          </div>
         </h4>
         <h4 className="modules">
           Available Shifts
