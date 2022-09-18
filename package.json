@@ -2,11 +2,14 @@
   "name": "ReplitReactjsProject",
   "version": "0.0.1",
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "dev": "vite",
     "build": "vite build",
     "serve": "vite preview"
   },
   "proxy": "http://localhost:5173",
+  "homepage": "https://darrenanimo.github.io/AggieHouseWebApp",
   "dependencies": {
     "@emotion/react": "^11.10.4",
     "@emotion/styled": "^11.10.4",
@@ -30,6 +33,7 @@
     "express-pino-logger": "^7.0.0",
     "firebase": "^9.9.0",
     "firebase-admin": "^11.0.1",
+    "gh-pages": "^4.0.0",
     "jwt-decode": "^3.1.2",
     "moment": "^2.29.3",
     "moment-timezone": "^0.5.37",

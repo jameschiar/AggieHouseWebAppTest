@@ -29,21 +29,18 @@ class SMSIndividual extends Component {
       <main> 
         
           <h2> Send Text Message to a Volunteer</h2>
-        <a href="https://replit.com/join/ciomwotuwj-darrenanimo">join link for replit server</a>
-        <div></div>
-          <a href="https://replit.com/@darrenanimo/ExpressServer#index.js">For now to use make sure this replit server is running</a>
-        <h3>method to choose volunteer should be dif</h3>
-          <label> Your Phone Number (ex: +19166477953)</label>
+        
+          <label style={{margin:'10px'}}> Your Phone Number (ex: +19166477953)</label>
           <br />
-          <input value={text.recipient}
+          <input className='inputText' value={text.recipient}
             onChange={e => this.setState({ text: { ...text, recipient: e.target.value } })} />
           <div style={spacer} />
-          <label> Message </label>
+          <label style={{margin:'10px'}}> Message: </label>
           <br />
-          <textarea rows={3} value={text.textmessage} style={textArea}
+          <textarea className='inputText' rows={3} value={text.textmessage} style={textArea}
             onChange={e => this.setState({ text: { ...text, textmessage: e.target.value } })} />
           <div style={spacer} />
-          <button onClick={this.sendText}> Send Text </button>
+          <button onClick={this.sendText} className='mini-button'> Send Text </button>
         </main>
     );
   }

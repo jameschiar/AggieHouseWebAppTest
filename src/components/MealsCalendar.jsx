@@ -97,7 +97,7 @@ function MealsCalendar() {
           <button
             className="modalSubmit"
             onClick={() => {
-              updateIngredients(selectedMeal.id, selectedMeal.ingredients);
+              updateIngredients(selectedMeal.id, ...selectedMeal.ingredients);
               setModalState(false);
             }}
           >
@@ -113,8 +113,7 @@ function MealsCalendar() {
               setModalState(false);
             }}
           >
-            {" "}
-            Cancel{" "}
+            Cancel
           </button>
           <button
             className="modalButtons"
@@ -124,8 +123,7 @@ function MealsCalendar() {
               setModalState(false);
             }}
           >
-            {" "}
-            Delete{" "}
+            Delete
           </button>
         </div>
       </div>

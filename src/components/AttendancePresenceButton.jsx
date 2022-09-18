@@ -1,6 +1,7 @@
 import React from "react";
 import { doc, updateDoc } from "@firebase/firestore";
 import { db } from "../firebase-config";
+import "../pages/css/Attendance.css";
 
 const AttendancePresenceButton = ({ resident, presence }) => {
   // clicking in the boxes will display "X" or nothing

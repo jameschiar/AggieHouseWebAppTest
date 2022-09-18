@@ -3,6 +3,8 @@ import React, { useState, useEffect } from "react";
 import { db } from "../firebase-config";
 import { collection, deleteDoc, doc, updateDoc, addDoc, onSnapshot } from "@firebase/firestore";
 
+import "../pages/css/Locker.css";
+
 const AdminDashAlerts = ({ deleteState }) => {
   const [alertData, setAlertData] = useState([]);
   const [newAlert, setNewAlert] = useState("");
@@ -52,10 +54,10 @@ const AdminDashAlerts = ({ deleteState }) => {
       {alertData?.map((alert)=> {
         return (
         <div style={{ marginTop: "10px" }}>
-          <p>Alert Message: {alert.message}</p>
-          <p>{deleteState && (
+          <p>Alert Message: {alert.message}  {deleteState && (
           <button
             style ={{ marginBottom: "10px" }}
+            className='mini-button'
             onClick={() => {
               if (confirm("Are you sure you want to delete entry " + alert.message + "?"))
                 deleteAlert(alert);
@@ -70,6 +72,7 @@ const AdminDashAlerts = ({ deleteState }) => {
         })}
         {!newAlertForm && (
             <button
+              className='mini-button'
               style = {{ marginTop: "7.5px" }}
               onClick={() => {
                 setNewAlertForm(true);
@@ -81,17 +84,19 @@ const AdminDashAlerts = ({ deleteState }) => {
       {newAlertForm && (
         <form onSubmit={addAlert}>
           <input
+            className='inputText'
             autoFocus
             type="text"
-            placeholder="message"
+            placeholder="Message"
             onChange={(e) => {
               setNewAlert(e.target.value);
             }}
           />
           
           <div style={{display: "flex"}}>
-            <input type = "submit" />
+            <input className='mini-button' type = "submit" />
             <button
+              className='mini-button'
               onClick={() => {
                 setNewAlertForm(false);
                 setNewAlert("");

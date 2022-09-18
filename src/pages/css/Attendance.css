@@ -40,11 +40,11 @@ td {
 }
 
 .table-button {
-  font-weight: bolder;
   background-color: #faf9f8;
   width: 40px;
   height: 40px;
   margin: 10px 0px 10px 0px;
+  border: 2px solid black;
 }
 
 .table-button:hover {
@@ -62,7 +62,14 @@ td {
   border: none;
 }
 
-.optionButtons{
+.submission {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  margin-right: 30px;
+}
+
+.optionButtons {
   width: 175px;
   height: 25px;
   border-radius: 20px;
@@ -71,8 +78,8 @@ td {
   margin: 15px;
 }
 
-.submitButton{
-  width: 75px;
+.submitDate {
+  width: 100px;
   height: 25px;
   border-radius: 20px;
   border: none;
@@ -80,7 +87,7 @@ td {
   margin: 15px;
 }
 
-.inputField{
+.inputField {
   margin-left: 5px;
   border-radius: 10px;
   border: 10px;
@@ -88,9 +95,14 @@ td {
   width: 200px;
 }
 
-media only screen and (min-width: 320px) {
+@media only screen and (max-width: 768px) {
   
   .attendance-sheet{
-    width: auto;
+    width: 800px;
+    margin: 25px 5px 25px 15px;
+  }
+
+  .submission{
+    justify-content: start;
   }
 }

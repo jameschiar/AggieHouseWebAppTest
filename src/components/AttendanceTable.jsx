@@ -1,4 +1,5 @@
 import React from "react";
+import "../pages/css/Attendance.css";
 
 // firestore
 import { doc, updateDoc, deleteDoc } from "@firebase/firestore";

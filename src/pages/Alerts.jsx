@@ -4,6 +4,7 @@ import NavBar from "../components/NavBar.jsx";
 import SMSIndividual from "../components/SMSIndividual.jsx";
 import SMSAll from "../components/SMSAll.jsx";
 import AdminDashAlerts from "../components/AdminDashAlerts.jsx";
+import "./css/Locker.css";
 
 function Alerts() {
 
@@ -19,6 +20,7 @@ return (
           />
         <button
           style={{ marginTop: "5px" }}
+          className='mini-button'
           onClick={() => {
             toggleDeleteState(!deleteState);
           }}>

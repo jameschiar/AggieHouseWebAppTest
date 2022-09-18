@@ -5,6 +5,7 @@ main {
 .body {
   font-family: poppins;
   color: #545454;
+  width: 100%;
 }
 
 .contact {
@@ -25,7 +26,7 @@ main {
 }
 
 .addButton {
-  width: 130px;
+  width: 175px;
   height: 30px;
   border-radius: 20px;
   border: none;
@@ -62,4 +63,12 @@ main {
 
 .link: hover {
   color: black;
+}
+
+
+@media only screen and (max-width: 768px) {
+  
+  .body{
+    width: 1000px;
+  }
 }

@@ -104,9 +104,9 @@ const BoardInfo = ({ deleteState }) => {
                   </button>
                 )}
               </h2>
-              <b className="field">Name:</b> {contact.name}{" "}
-              <b className="field">Email:</b> {contact.email}{" "}
-              <b className="field">Phone Number:</b> {contact.number}
+              <b className="field">Name:</b> {contact.name}{" "}<br />
+              <b className="field">Email:</b> {contact.email}{" "}<br />
+              <b className="field">Phone Number:</b> {contact.number}<br />
             </div>
           );
         })}
