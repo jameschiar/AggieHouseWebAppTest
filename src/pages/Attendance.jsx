@@ -141,7 +141,7 @@ function Attendance() {
               min="2022-01-01"
               max="2100-01-01"
             />
-            <input className='submitButton' type="submit" />
+            <input className="submitDate" type="submit" />
           </form>
           <div>
             <h2 style={{ marginLeft: "30px", color: "#545454" }}>{date}</h2>
@@ -150,14 +150,7 @@ function Attendance() {
               deleteState={deleteState}
             />
           </div>
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "end",
-              alignItems: "center",
-              marginRight: "30px",
-            }}
-          >
+          <div className='submission'>
             <span style={{ marginRight: "10px" }}>
               {attendanceSubmittedMsg}
             </span>
@@ -167,7 +160,7 @@ function Attendance() {
           </div>
         </>
       )}
-      <div style={{ display: "flex", flexDirection: "column", width: "130px" }}>
+      <div style={{ display: "flex", flexDirection: "column", width: "130px", marginTop: '10px' }}>
         <AttendanceResidentForm />
         <button
           className='optionButtons'

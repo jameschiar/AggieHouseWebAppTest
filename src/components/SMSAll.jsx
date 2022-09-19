@@ -37,15 +37,13 @@ class SMSAll extends Component {
     return (
       <main> 
           <h2> Send Text Message to All Volunteers</h2>
-          <br />
-        <h3>doesnt work rn</h3>
+          
           <div style={spacer} />
-          <label> Message </label>
+          <label style={{margin:'10px'}}> Message: </label>
           <br />
-          <textarea rows={3} value={text.textmessage} style={textArea}
-            onChange={e => this.setState({ text: { ...text, textmessage: e.target.value } })} />
-          <div style={spacer} />
-          <button onClick={this.sendText}> Send Text </button>
+          <textarea className='inputText' rows={3} value={text.textmessage} style={textArea}
+            onChange={e => this.setState({ text: { ...text, textmessage: e.target.value } })} /><br/>
+          <button onClick={this.sendText} className='mini-button'> Send Text </button>
 
         
         </main>

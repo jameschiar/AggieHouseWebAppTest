@@ -1,4 +1,5 @@
 import React from "react";
+import "../pages/css/Todo.css";
 
 // components
 import ChoreStatusButton from "./ChoreStatusButton";

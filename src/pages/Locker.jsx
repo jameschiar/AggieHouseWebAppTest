@@ -36,10 +36,11 @@ function Lock() {
   return (
     <main>
       <NavBar />
-      <div>
+      <div style={{margin:'15px'}}>
         <p>Current locker code: {currCode.combination}</p>
         <label htmlFor="lock-code">Locker Code:</label>
         <input
+          className='inputText'
           type="number"
           id="lock-code"
           name="lock-code"
@@ -48,8 +49,8 @@ function Lock() {
           max="9999"
         />
         <div>
-          <button onClick={handleRandomNum}>Generate New Code</button>
-          <button onClick={updateCode}>Save New Code</button>
+          <button onClick={handleRandomNum} className="button">Generate New Code</button><br/>
+          <button onClick={updateCode} className="button">Save New Code</button>
         </div>
       </div>
     </main>
