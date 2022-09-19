@@ -36,24 +36,32 @@ function Dashboard() {
 
       <div id="dash">
         <h2 className="greeting">Hello {user.displayName}</h2>
-        <h3 className="modules">
-          Upcoming Shift
-          {upcomingShift && (
-            <p className="info">
-              {upcomingShift.start.toLocaleDateString("en-US", DATE_OPTIONS)}
-            </p>
-          )}
-        </h3>
-        <h4 className="modules">
-          Alerts
-          <div className="info">
-            <DashAlerts />
-          </div>
-        </h4>
-        <h4 className="modules">
-          Available Shifts
-          <p className="info">List of Available shifts</p>
-        </h4>
+        <div className="modules">
+          <h4>
+            Upcoming Shift
+            {upcomingShift ? (
+              <p className="info">
+                {upcomingShift.start.toLocaleDateString("en-US", DATE_OPTIONS)}
+              </p>
+            ) : (
+              <p className="info">You have no upcoming shift</p>
+            )}
+          </h4>
+        </div>
+        <div className="modules">
+          <h4>
+            Alerts
+            <div className="info">
+              <DashAlerts />
+            </div>
+          </h4>
+        </div>
+        <div className="modules">
+          <h4>
+            Available Shifts
+            <p className="info">List of Available shifts</p>
+          </h4>
+        </div>
         <hr />
       </div>
     </main>
