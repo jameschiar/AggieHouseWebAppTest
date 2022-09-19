@@ -9,6 +9,7 @@
     "serve": "vite preview"
   },
   "proxy": "http://localhost:5173",
+  "private": false,
   "homepage": "https://darrenanimo.github.io",
   "dependencies": {
     "@emotion/react": "^11.10.4",
