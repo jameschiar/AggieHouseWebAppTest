@@ -13,17 +13,17 @@ import { useUser } from "../context/UserProvider";
 
 import "../pages/css/Resources.css";
 
-const ResourceLinks = ({ deleteState }) => {
+const Tutorials = ({ deleteState }) => {
   // const [edit, toggleEdit] = useState(false);
   const { users, userFirebaseData } = useUser();
-  const [resourcesData, setResourcesData] = useState([]);
+  const [tutorialData, setTutorialData] = useState([]);
   const [newTitle, setNewTitle] = useState("");
   const [newLink, setNewLink] = useState("");
-  const [newResourcesForm, setNewResourcesForm] = useState(false);
+  const [newTutorialForm, setNewTutorialForm] = useState(false);
   // const [questionSubmittedMsg, setQuestonSubmittedMsg] = useState("");
   // const [answerSubmittedMsg, setAnswerSubmittedMsg] = useState("");
 
-  const resourcesCollectionRef = collection(db, "resourceLinks");
+  const tutorialsCollectionRef = collection(db, "tutorials");
 
   const isAdmin = () => {
     return userFirebaseData?.role === "admin";
@@ -31,10 +31,10 @@ const ResourceLinks = ({ deleteState }) => {
 
   useEffect(() => {
     let unsub;
-    const getResources = async () => {
+    const getTutorials = async () => {
       // onSnapshot listens to firebase for changes
-      unsub = onSnapshot(resourcesCollectionRef, (collection) => {
-        setResourcesData(
+      unsub = onSnapshot(tutorialsCollectionRef, (collection) => {
+        setTutorialData(
           collection.docs.map((doc) => ({
             id: doc.id,
             title: doc.data().title,
@@ -43,10 +43,10 @@ const ResourceLinks = ({ deleteState }) => {
         );
       });
     };
-    getResources();
+    getTutorials();
   }, []);
 
-  const addResources = async (e) => {
+  const addTutorial = async (e) => {
     e.preventDefault();
 
     const fields = {
@@ -54,11 +54,11 @@ const ResourceLinks = ({ deleteState }) => {
       url: newLink,
     };
 
-    await addDoc(collection(db, "resourceLinks"), fields);
+    await addDoc(collection(db, "tutorials"), fields);
 
     setNewTitle("");
     setNewLink("");
-    setNewResourcesForm(false);
+    setNewTutorialForm(false);
   };
 
   // const submitQuestion = async (e) => {
@@ -73,8 +73,8 @@ const ResourceLinks = ({ deleteState }) => {
   //   setQuestionSubmittedMsg("Question submitted!");
   // };
 
-  const deleteResources = async (resources) => {
-    await deleteDoc(doc(db, "resourceLinks", resources.id));
+  const deleteTutorial = async (tutorials) => {
+    await deleteDoc(doc(db, "tutorials", tutorials.id));
   };
 
   // const confirmDelete = () => {
@@ -84,11 +84,11 @@ const ResourceLinks = ({ deleteState }) => {
   return (
     <div style={{ display: "flex", alignItems: "center" }}>
       <div className="body">
-        {resourcesData?.map((resource) => {
+        {tutorialData?.map((tutorial) => {
           return (
             <div style={{ marginTop: "10px" }}>
                 <ul>
-                  <li className='list'><u><a className='link' href={resource.url} target='_blank'>{resource.title}</a></u>
+                  <li className='list'><u><a className='link' href={tutorial.url} target='_blank'>{tutorial.title}</a></u>
                 {deleteState && (
                   <button
                     className="deleteButton"
@@ -98,7 +98,7 @@ const ResourceLinks = ({ deleteState }) => {
                           "Are you sure you want to delete this Tutorial?"
                         )
                       )
-                        deleteResources(resource);
+                        deleteTutorial(tutorial);
                     }}
                   >
                     Delete
@@ -108,18 +108,18 @@ const ResourceLinks = ({ deleteState }) => {
             </div>
           );
         })}
-        {isAdmin() && !newResourcesForm && (
+        {isAdmin() && !newTutorialForm && (
           <button
             className="addButton"
             onClick={() => {
-              setNewResourcesForm(true);
+              setNewTutorialForm(true);
             }}
           >
-            Add Resource
+            Add Tutorial
           </button>
         )}
-        {isAdmin() && newResourcesForm && (
-          <form onSubmit={addResources}>
+        {isAdmin() && newTutorialForm && (
+          <form onSubmit={addTutorial}>
             <input
               autoFocus
               className="inputText"
@@ -142,7 +142,7 @@ const ResourceLinks = ({ deleteState }) => {
               <button
                 className="submitButton"
                 onClick={() => {
-                  setNewResourcesForm(false);
+                  setNewTutorialForm(false);
                   setNewTitle("");
                   setNewLink("");
                 }}
@@ -157,4 +157,4 @@ const ResourceLinks = ({ deleteState }) => {
   );
 };
 
-export default ResourceLinks;
+export default Tutorials;

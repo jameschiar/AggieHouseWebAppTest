@@ -6,6 +6,8 @@ import Box from "@mui/material/Box";
 import { useUser } from "../context/UserProvider";
 
 import FAQInfo from "../components/FAQ";
+import Tutorials from "../components/Tutorials";
+import ResourceLinks from "../components/ResourceLinks";
 import BoardInfo from "../components/Contact";
 
 import NavBar from "../components/NavBar.jsx";
@@ -80,73 +82,16 @@ export default function Resources() {
           </button>)}
         </TabPanel>
         <TabPanel value={value} index={1}>
-          <h2>Links to Documents in the Aggie House Drive</h2>
-          <ul className="list">
-            <li>
-              <a
-                className="link"
-                href="https://docs.google.com/spreadsheets/d/1C7d3nHh5Vp_mPZlKN-Cp2DecNz0HXHlA8MOgs1_bCzo/edit?usp=sharing"
-              >
-                {" "}
-                Board Contact Sheet
-              </a>
-            </li>
-            <li>
-              <a
-                className="link"
-                href="https://docs.google.com/spreadsheets/d/1Sw3h6l79ewC8D9s7eooxWIAeIPyGuLxChWd3qHmsD-E/edit?usp=sharing"
-                target="_blank"
-              >
-                Master Roster{" "}
-              </a>
-            </li>
-            <li>
-              <a
-                className="link"
-                href="https://docs.google.com/document/d/1UgGepZqLtNeteT1KAp5mIkjRnSpaI7ZYDQDe373sTHY/edit?usp=sharing"
-                target="_blank"
-              >
-                Meals Sheet{" "}
-              </a>
-            </li>
-            <li>
-              <a
-                className="link"
-                href="https://docs.google.com/presentation/d/1Na2VB5MG38gW5g7VkvqcPUSZlsfK2kooDZH2wrRs4tc/edit?usp=sharing"
-                target="_blank"
-              >
-                AH Family Introduction Slides{" "}
-              </a>
-            </li>
-            <li>
-              <a
-                className="link"
-                href="https://docs.google.com/document/d/1ZENhsKEKpoeRFlOuH768nXXLn6HWmYyiR1xWJHN-8R8/edit?usp=sharing"
-                target="_blank"
-              >
-                Volunteer Operations Guide{" "}
-              </a>
-            </li>
-            <li>
-              <a
-                className="link"
-                href="https://forms.gle/RKo4wpBzPet5fZFy5"
-                target="_blank"
-              >
-                Incident Report Form{" "}
-              </a>
-            </li>
-            <li>
-              <a
-                className="link"
-                href="https://docs.google.com/forms/d/e/1FAIpQLSeHfaQAC_BwkYkf7RvvvkD5x3lASe4K2kaKvgB0vhc3fiKCsQ/viewform?usp=sf_link"
-                target="_blank"
-              >
-                {" "}
-                COVID-19 Report Form{" "}
-              </a>
-            </li>
-          </ul>
+          <h2> Here are the links to Resources in the Aggie House Drive </h2>
+          <ResourceLinks deleteState={deleteState} />
+          {isAdmin() && (<button
+            className="addButton"
+            onClick={() => {
+              toggleDeleteState(!deleteState);
+            }}
+          >
+            Delete Tutorial
+          </button>)}
         </TabPanel>
         <TabPanel value={value} index={2}>
           <h2>FAQs</h2>
@@ -161,7 +106,16 @@ export default function Resources() {
           </button>)}
         </TabPanel>
         <TabPanel value={value} index={3}>
-          For videos to use the website and other common 'how-to's
+          <h2> Click on the tutorial you want to view: </h2>
+          <Tutorials deleteState={deleteState} />
+          {isAdmin() && (<button
+            className="addButton"
+            onClick={() => {
+              toggleDeleteState(!deleteState);
+            }}
+          >
+            Delete Tutorial
+          </button>)}
         </TabPanel>
       </Box>
     </main>

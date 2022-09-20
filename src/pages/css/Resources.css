@@ -59,10 +59,11 @@ main {
 .link {
   text-decoration: none;
   color: #6d6464;
+  font-size: 24px;
 }
 
 .link: hover {
-  color: black;
+  color: aliceblue;
 }
 
 
