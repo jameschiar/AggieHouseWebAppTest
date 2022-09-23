@@ -12,8 +12,9 @@ class SMSIndividual extends Component {
     const { text } = this.state;
     console.log("sending text");
     //pass text message GET variables via query string
+    // once backend is deployed, use its domain instead of localhost
     fetch(
-      `http://localhost:5173/send-text?recipient=${text.recipient}&textmessage=${text.textmessage}`
+      `http://localhost:5000/send-text?recipient=${text.recipient}&textmessage=${text.textmessage}`
     )
       .then((msg) => console.log(msg))
       .catch((err) => console.error(err));

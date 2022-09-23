@@ -6,14 +6,12 @@ import { collection, deleteDoc, doc, updateDoc, addDoc, onSnapshot } from "@fire
 
 class SMSAll extends Component {
 
-  
-  
-  
   state = {
     text: {
-      textmessage: ''
-    }
-  }
+      recipient: '',
+      textmessage: '',
+    },
+  };
 
   
 
@@ -22,9 +20,15 @@ class SMSAll extends Component {
     
     fetch(`https://ExpressServer.darrenanimo.repl.co/send-text?recipient=${text.textmessage}&textmessage=${text.textmessage}`)
     .catch(err => console.error(err))
-
-    
   }
+
+  sendAll = () => {
+    const { users } = useUser();
+
+    {users.map((user, key) => {
+          return <user.phoneNumber user={user} key={key} />;
+        })}
+  };
 
   render() {
     const { text } = this.state;
@@ -34,6 +38,9 @@ class SMSAll extends Component {
     const textArea = {
       borderRadius: 4
     }
+    
+
+    
     return (
       <main> 
           <h2> Send Text Message to All Volunteers</h2>
