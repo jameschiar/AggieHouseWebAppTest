@@ -10,6 +10,7 @@
     "test": "eslint . && mocha test",
     "dev": "nodemon ."
   },
+  
   "description": "Node implementation of Appointment Reminders",
   "author": {
     "name": "Twilio",
@@ -29,7 +30,8 @@
     "notification"
   ],
   "engines": {
-    "node": ">=8.x"
+    "node": ">=8.x",
+    "npm": ">=16.x.x"
   },
   "dependencies": {
     "@firebase/app": "^0.7.31",
