@@ -12,6 +12,7 @@ class SMSIndividual extends Component {
     const { text } = this.state;
     console.log("sending text");
     //pass text message GET variables via query string
+    // once backend is deployed, use its domain instead of localhost
     fetch(
       `https://aggie-house-reminders.herokuapp.com/send-text?recipient=${text.recipient}&textmessage=${text.textmessage}`
     )

@@ -1,54 +1,99 @@
-import React, { Component } from 'react';
+import React, {useState} from 'react';
+import styled from 'styled-components';
 import { useUser } from "../context/UserProvider";
 
-import { db } from "../firebase-config";
-import { collection, deleteDoc, doc, updateDoc, addDoc, onSnapshot } from "@firebase/firestore";
+function SMSAll() {
+  const [sms, setSms] = useState('');
+  const [number, setNumber] = useState('');
+  const { users } = useUser();
 
-class SMSAll extends Component {
+  const sendSms = (event) => {
+    event.preventDefault();
 
-  
-  
-  
-  state = {
-    text: {
-      textmessage: ''
+    let smsObj = {
+        mobile_number: number,
+        message: sms,
     }
-  }
 
-  
-
-  sendText = _ => {
-    const { text } = this.state;
     
-    fetch(`https://ExpressServer.darrenanimo.repl.co/send-text?recipient=${text.textmessage}&textmessage=${text.textmessage}`)
+    users.forEach((user, key) => {
+      console.log("sending text");
+    fetch(`https://aggie-house-reminders.herokuapp.com/send-text?recipient=${user.phoneNumber}&textmessage=${smsObj.message}`)
     .catch(err => console.error(err))
-
+      })
+  }
     
+              
+
+
+  const handleChange = (event) => {
+    if (event.target.name === 'number') {
+      setNumber(event.target.value);
+    } else if (event.target.name === 'sms') {
+      setSms(event.target.value);
+    }
+  
   }
 
-  render() {
-    const { text } = this.state;
-    const spacer = {
-      margin: 8
-    }
-    const textArea = {
-      borderRadius: 4
-    }
-    return (
-      <main> 
-          <h2> Send Text Message to All Volunteers</h2>
-          
-          <div style={spacer} />
-          <label style={{margin:'10px'}}> Message: </label>
-          <br />
-          <textarea className='inputText' rows={3} value={text.textmessage} style={textArea}
-            onChange={e => this.setState({ text: { ...text, textmessage: e.target.value } })} /><br/>
-          <button onClick={this.sendText} className='mini-button'> Send Text </button>
-
-        
-        </main>
-    );
-  }
+  return (
+    <Container>
+      <Header>SMS All Volunteers (ill work on css of it by tonight)</Header>
+      <Form onSubmit={sendSms}>
+      
+        <label>Message:</label>
+        <TextArea name='sms' onChange={handleChange}></TextArea>
+        <Button>Submit</Button>
+      </Form>
+    </Container>
+  );
 }
 
 export default SMSAll;
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: #E8E2DC;
+`
+
+const Header = styled.h3`
+  text-transform: uppercase;
+  letter-spacing: 1px;
+`
+
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  align-items: center;s
+`
+
+const Input = styled.input`
+  width: 100%;
+  padding: 12px;
+  margin: 6px 0 4px;
+`
+
+const TextArea = styled.textarea`
+  width: 100%;
+  resize: vertical;
+  padding: 12px;
+  margin: 6px 0 4px;
+  height: 100px;
+`
+
+const Button = styled.button`
+  width: 180px;
+  padding: 12px 25px;
+  margin: 6px 0 4px;
+  font-size: 12px;
+  text-transform: uppercase;
+  color: white;
+  background-color: black;
+  letter-spacing: 1px;
+  &:hover {
+    cursor: pointer;
+  }
+`
