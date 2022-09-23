@@ -90,7 +90,7 @@ export default function Resources() {
               toggleDeleteState(!deleteState);
             }}
           >
-            Delete Tutorial
+            Delete Resource
           </button>)}
         </TabPanel>
         <TabPanel value={value} index={2}>

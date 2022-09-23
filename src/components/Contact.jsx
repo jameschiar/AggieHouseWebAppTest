@@ -9,6 +9,7 @@ import {
   doc,
   addDoc,
   onSnapshot,
+  orderBy
 } from "@firebase/firestore";
 
 import "../pages/css/Resources.css";
