@@ -18,7 +18,7 @@ function SMSAll() {
     
     users.forEach((user, key) => {
       console.log("sending text");
-    fetch(`https://aggie-house-reminders.herokuapp.com//send-text?recipient=${user.phoneNumber}&textmessage=${smsObj.message}`)
+    fetch(`https://aggie-house-reminders.herokuapp.com/send-text?recipient=${user.phoneNumber}&textmessage=${smsObj.message}`)
     .catch(err => console.error(err))
       })
   }
