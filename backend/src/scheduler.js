@@ -6,7 +6,7 @@ const moment = require('moment');
 
 function start() {
   new CronJob(
-    '*/5 * * * *', // run every 5 minutes
+    '*/1 * * * *', // run every 5 minutes
     () => {
       const currentTime = new Date();
       console.log(`Running Shift Check ${moment(currentTime).format()}`);

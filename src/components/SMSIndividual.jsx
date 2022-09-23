@@ -13,7 +13,7 @@ class SMSIndividual extends Component {
     console.log("sending text");
     //pass text message GET variables via query string
     fetch(
-      `http://localhost:5171/send-text?recipient=${text.recipient}&textmessage=${text.textmessage}`
+      `https://aggie-house-reminders.herokuapp.com/send-text?recipient=${text.recipient}&textmessage=${text.textmessage}`
     )
       .then((msg) => console.log(msg))
       .catch((err) => console.error(err));
