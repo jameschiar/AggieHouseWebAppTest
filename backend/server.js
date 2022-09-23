@@ -1,51 +1,37 @@
 'use strict';
 
-const express = require('express');
-const path = require('path');
-const logger = require('morgan');
-const cookieParser = require('cookie-parser');
-const bodyParser = require('body-parser');
+const accountSid = process.env.TWILIO_ACCOUNT_SID;
+const authToken = process.env.TWILIO_AUTH_TOKEN;
+const twilioPhoneNumber = process.env.TWILIO_PHONE_NUMBER;
 
-const appointments = require('./routes/appointments');
+const express = require('express');
+const client = require('twilio')(accountSid, authToken);
+const cors = require('cors');
 
 const app = express();
 
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'pug');
+app.use(cors());
 
-app.use(logger('dev'));
-app.use(bodyParser.json());
-app.use(
-  bodyParser.urlencoded({
-    extended: false,
-  })
-);
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
-app.locals.moment = require('moment');
-
-app.use('/appointments', appointments);
-app.use('/', appointments);
-
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  const err = new Error('Not Found');
-  err.status = 404;
-  next(err);
+app.get('/', (req, res) => {
+  res.send('this is working');
 });
 
-// error handler
-app.use(function(err, req, res, next) {
-  if (err.status !== 404) {
-    console.error(err);
-  }
+app.get('/send-text', (req, res) => {
+  //Welcome Message
+  res.send('Hello to the Twilio Server');
 
-  res.status(err.status || 500);
-  res.render('error', {
-    message: err.message,
-    error: {},
-  });
+  //_GET Variables
+  const { recipient, textmessage } = req.query;
+
+  //Send Text
+  client.messages
+    .create({
+      body: textmessage,
+      to: recipient, // Text this number
+      from: twilioPhoneNumber, // From a valid Twilio number
+    })
+    .then(message => console.log(message.body))
+    .catch(err => console.error(err));
 });
 
 module.exports = app;
