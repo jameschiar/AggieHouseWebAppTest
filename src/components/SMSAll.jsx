@@ -15,19 +15,26 @@ class SMSAll extends Component {
 
   
 
-  sendText = _ => {
+  sendText = (volunteer) => {
     const { text } = this.state;
     
-    fetch(`https://ExpressServer.darrenanimo.repl.co/send-text?recipient=${text.textmessage}&textmessage=${text.textmessage}`)
+    fetch(`https://ExpressServer.darrenanimo.repl.co/send-text?recipient=${volunteer}&textmessage=${text.textmessage}`)
     .catch(err => console.error(err))
   }
 
-  sendAll = () => {
-    const { users } = useUser();
+  
+  
+  sendAll = _ => {
+    
+    const { text } = this.state;
 
-    {users.map((user, key) => {
-          return <user.phoneNumber user={user} key={key} />;
-        })}
+    //{users.map((user, key) => {
+      //const [userData] = useState(user);
+      console.log("sending text");
+      
+      fetch(`https://ExpressServer.darrenanimo.repl.co/send-text?recipient=${userData.phoneNumber}&textmessage=${text.textmessage}`)
+    .catch(err => console.error(err))
+        //})}
   };
 
   render() {
@@ -38,7 +45,8 @@ class SMSAll extends Component {
     const textArea = {
       borderRadius: 4
     }
-    
+
+    //const { users } = useUser();
 
     
     return (
@@ -50,7 +58,7 @@ class SMSAll extends Component {
           <br />
           <textarea className='inputText' rows={3} value={text.textmessage} style={textArea}
             onChange={e => this.setState({ text: { ...text, textmessage: e.target.value } })} /><br/>
-          <button onClick={this.sendText} className='mini-button'> Send Text </button>
+          <button onClick={this.sendAll} className='mini-button'> Send Text </button>
 
         
         </main>
