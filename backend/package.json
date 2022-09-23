@@ -29,7 +29,8 @@
     "notification"
   ],
   "engines": {
-    "node": ">=8.x"
+    "node": ">=8.x",
+    "npm": ">=8.x"
   },
   "dependencies": {
     "@firebase/app": "^0.7.31",
@@ -38,6 +39,7 @@
     "body-parser": "^1.19.0",
     "configure-env": "^1.0.0",
     "cookie-parser": "~1.4.3",
+    "cors": "^2.8.5",
     "cron": "^1.1.0",
     "debug": ">=2.6.9",
     "dotenv-safe": "^4.0.4",
