@@ -11,17 +11,14 @@ function SMSAll() {
     event.preventDefault();
 
     let smsObj = {
-        mobile_number: '1' + number,
+        mobile_number: number,
         message: sms,
     }
 
     
     users.forEach((user, key) => {
-      //const [userData] = useState(user);
       console.log("sending text");
-
-    
-    fetch(`https://ExpressServer.darrenanimo.repl.co/send-text?recipient=${user.phoneNumber}&textmessage=${smsObj.message}`)
+    fetch(`https://aggie-house-reminders.herokuapp.com//send-text?recipient=${user.phoneNumber}&textmessage=${smsObj.message}`)
     .catch(err => console.error(err))
       })
   }
