@@ -5,7 +5,7 @@ if (!process.env.CI) {
 const cfg = {};
 
 // HTTP Port
-cfg.port = process.env.PORT || 5173;
+cfg.port = process.env.PORT || 5171;
 
 // Twilio account SID and auth token
 const mySecret1 = process.env['TWILIO_ACCOUNT_SID'];
