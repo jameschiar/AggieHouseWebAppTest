@@ -44,8 +44,8 @@ function requiresNotification(appointment, currentTime) {
   );
 }
 
-async function sendNotification(appointment) {
-  appointment.shiftVolunteers.forEach(volunteer => {
+async function sendNotification(volunteers) {
+  volunteers.forEach(volunteer => {
     if (volunteer.phoneNumber) {
       // Create options to send the message
       const options = {
@@ -88,9 +88,10 @@ async function checkAndSendNecessaryNotifications(currentTime) {
     `Sending ${appointmentsRequiringNotification.length} notifications`
   );
 
-  appointmentsRequiringNotification.forEach(appointment =>
-    sendNotification(appointment.data())
-  );
+  appointmentsRequiringNotification.forEach(appointment => {
+    sendNotification(appointment.data().shiftVolunteers);
+    sendNotification(appointment.data().backupVolunteers);
+  });
 }
 
 module.exports = {
