@@ -17,7 +17,10 @@ function SMSIndividual() {
 
     fetch(`https://aggie-house-reminders.herokuapp.com/send-text?recipient=${smsObj.mobile_number}&textmessage=${smsObj.message}`)
     .catch(err => console.error(err))
+    
+    alert("Text Sent")
   }
+  
     
               
 

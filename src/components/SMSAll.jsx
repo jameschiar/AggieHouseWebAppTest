@@ -21,6 +21,8 @@ function SMSAll() {
     fetch(`https://aggie-house-reminders.herokuapp.com/send-text?recipient=${user.phoneNumber}&textmessage=${smsObj.message}`)
     .catch(err => console.error(err))
       })
+    
+    alert("Mass Text Sent")
   }
     
               
