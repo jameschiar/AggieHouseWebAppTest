@@ -64,9 +64,10 @@ td {
 
 .submission {
   display: flex;
-  justify-content: end;
+  justify-content: space-between;
   align-items: center;
   margin-right: 30px;
+  margin-left: 30px;
 }
 
 .optionButtons {
@@ -97,13 +98,12 @@ td {
 }
 
 @media only screen and (max-width: 768px) {
-  
-  .attendance-sheet{
+  .attendance-sheet {
     width: 800px;
     margin: 25px 5px 25px 15px;
   }
 
-  .submission{
+  .submission {
     justify-content: start;
   }
 }

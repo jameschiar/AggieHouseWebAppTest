@@ -41,6 +41,7 @@ function Attendance() {
     setDate(new Date().toLocaleDateString());
     setNewDate(new Date().toLocaleDateString());
     getAttendanceData();
+    resetAttendaceData();
     setBusy(false);
 
     // useEffect cleanup function
@@ -100,6 +101,19 @@ function Attendance() {
     setAttendanceSubmittedMsg("Submitted!");
   };
 
+  const resetAttendaceData = async () => {
+    const snapshot = await getDocs(collection(db, "attendance"));
+    if (!snapshot.empty) {
+      snapshot.forEach((resident) => {
+        const newFields = {
+          ...resident.data(),
+          presence: "",
+        };
+        updateDoc(doc(db, "attendance", resident.id), newFields);
+      });
+    }
+  };
+
   // change the attendance table to chosen date
   const changeDate = async (e) => {
     e.preventDefault();
@@ -153,12 +167,19 @@ function Attendance() {
             />
           </div>
           <div className="submission">
-            <span style={{ marginRight: "10px" }}>
-              {attendanceSubmittedMsg}
-            </span>
-            <button onClick={submitAttendanceData} id="submit-button">
-              Submit
+            <button onClick={resetAttendaceData} id="submit-button">
+              Reset
             </button>
+            <div>
+              {attendanceSubmittedMsg && (
+                <span style={{ marginRight: "10px" }}>
+                  {attendanceSubmittedMsg}
+                </span>
+              )}
+              <button onClick={submitAttendanceData} id="submit-button">
+                Submit
+              </button>
+            </div>
           </div>
         </>
       )}
