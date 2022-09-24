@@ -39,7 +39,7 @@ function SMSAll() {
       <Header>SMS All Volunteers</Header>
       <Form onSubmit={sendSms}>
         <label>Message:</label>
-        <TextArea name='sms' onChange={handleChange}></TextArea>
+        <TextArea name="sms" onChange={handleChange}></TextArea>
         <Button className="mini-button">Submit </Button>
       </Form>
     </Container>
@@ -53,7 +53,6 @@ const Container = styled.div`
   flex-direction: column;
   align-items: left;
   justify-content: center;
-  height: 100vh;
   background-color: #e8e2dc;
 `;
 
@@ -66,7 +65,7 @@ const Form = styled.form`
   display: flex;
   flex-direction: column;
   align-items: left;
-`
+`;
 
 const Input = styled.input`
   width: 50%;
