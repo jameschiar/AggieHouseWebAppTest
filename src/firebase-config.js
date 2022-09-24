@@ -9,7 +9,7 @@ import { getStorage } from "firebase/storage";
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 
-const API_KEY = "AIzaSyBVe5EXHTpRPIiNSAGEkstZtpIWxmz2Mfw"//import.meta.env.VITE_API_KEY;
+const API_KEY = import.meta.env.VITE_API_KEY;
 
 const firebaseConfig = {
   apiKey: API_KEY,
