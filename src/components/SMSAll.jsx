@@ -37,12 +37,11 @@ function SMSAll() {
 
   return (
     <Container>
-      <Header>SMS All Volunteers (ill work on css of it by tonight)</Header>
+      <Header>SMS All Volunteers</Header>
       <Form onSubmit={sendSms}>
-      
         <label>Message:</label>
         <TextArea name='sms' onChange={handleChange}></TextArea>
-        <Button>Submit</Button>
+        <Button className="mini-button">Submit </Button>
       </Form>
     </Container>
   );
@@ -53,9 +52,8 @@ export default SMSAll;
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: left;
   justify-content: center;
-  height: 100vh;
   background-color: #E8E2DC;
 `
 
@@ -67,17 +65,17 @@ const Header = styled.h3`
 const Form = styled.form`
   display: flex;
   flex-direction: column;
-  align-items: center;s
+  align-items: left;
 `
 
 const Input = styled.input`
-  width: 100%;
+  width: 50%;
   padding: 12px;
   margin: 6px 0 4px;
 `
 
 const TextArea = styled.textarea`
-  width: 100%;
+  width: 50%;
   resize: vertical;
   padding: 12px;
   margin: 6px 0 4px;
@@ -85,14 +83,6 @@ const TextArea = styled.textarea`
 `
 
 const Button = styled.button`
-  width: 180px;
-  padding: 12px 25px;
-  margin: 6px 0 4px;
-  font-size: 12px;
-  text-transform: uppercase;
-  color: white;
-  background-color: black;
-  letter-spacing: 1px;
   &:hover {
     cursor: pointer;
   }

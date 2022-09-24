@@ -1,69 +1,89 @@
-import React, { Component } from "react";
+import React, {useState} from 'react';
+import styled from 'styled-components';
+import { useUser } from "../context/UserProvider";
 
-class SMSIndividual extends Component {
-  state = {
-    text: {
-      recipient: "",
-      textmessage: "",
-    },
-  };
+function SMSIndividual() {
+  const [sms, setSms] = useState('');
+  const [number, setNumber] = useState('');
+  const { users } = useUser();
 
-  sendText = (_) => {
-    const { text } = this.state;
-    console.log("sending text");
-    //pass text message GET variables via query string
-    // once backend is deployed, use its domain instead of localhost
-    fetch(
-      `https://aggie-house-reminders.herokuapp.com/send-text?recipient=${text.recipient}&textmessage=${text.textmessage}`
-    )
-      .then((msg) => console.log(msg))
-      .catch((err) => console.error(err));
-  };
+  const sendSms = (event) => {
+    event.preventDefault();
 
-  render() {
-    const { text } = this.state;
-    const spacer = {
-      margin: 8,
-    };
-    const textArea = {
-      borderRadius: 4,
-    };
-    return (
-      <main>
-        <h2> Send Text Message to a Volunteer</h2>
+    let smsObj = {
+        mobile_number: number,
+        message: sms,
+    }
 
-        <label style={{ margin: "10px" }}>
-          {" "}
-          Your Phone Number (ex: +19166477953)
-        </label>
-        <br />
-        <input
-          className="inputText"
-          value={text.recipient}
-          onChange={(e) =>
-            this.setState({ text: { ...text, recipient: e.target.value } })
-          }
-        />
-        <div style={spacer} />
-        <label style={{ margin: "10px" }}> Message: </label>
-        <br />
-        <textarea
-          className="inputText"
-          rows={3}
-          value={text.textmessage}
-          style={textArea}
-          onChange={(e) =>
-            this.setState({ text: { ...text, textmessage: e.target.value } })
-          }
-        />
-        <div style={spacer} />
-        <button onClick={this.sendText} className="mini-button">
-          {" "}
-          Send Text{" "}
-        </button>
-      </main>
-    );
+    fetch(`https://aggie-house-reminders.herokuapp.com/send-text?recipient=${smsObj.mobile_number}&textmessage=${smsObj.message}`)
+    .catch(err => console.error(err))
   }
+    
+              
+
+
+  const handleChange = (event) => {
+    if (event.target.name === 'number') {
+      setNumber(event.target.value);
+    } else if (event.target.name === 'sms') {
+      setSms(event.target.value);
+    }
+  
+  }
+
+  return (
+    <Container>
+      <Header>Send SMS Message</Header>
+      <Form onSubmit={sendSms}>
+        <label>Volunteer:</label>
+        <Input name='number' onChange={handleChange}></Input>
+        <label>Message:</label>
+        <TextArea name='sms' onChange={handleChange}></TextArea>
+        <Button className="mini-button">Submit</Button>
+      </Form>
+    </Container>
+  );
 }
 
 export default SMSIndividual;
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  justify-content: center;
+  
+  background-color: #E8E2DC;
+`
+
+const Header = styled.h3`
+  text-transform: uppercase;
+  letter-spacing: 1px;
+`
+
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+`
+
+const Input = styled.input`
+  width: 50%;
+  padding: 12px;
+  margin: 6px 0 4px;
+`
+
+const TextArea = styled.textarea`
+  width: 50%;
+  resize: vertical;
+  padding: 12px;
+  margin: 6px 0 4px;
+  height: 100px;
+`
+
+const Button = styled.button`
+  
+  &:hover {
+    cursor: pointer;
+  }
+`
