@@ -15,9 +15,7 @@ class SMSIndividual extends Component {
     // once backend is deployed, use its domain instead of localhost
     fetch(
       `https://aggie-house-reminders.herokuapp.com/send-text?recipient=${text.recipient}&textmessage=${text.textmessage}`
-    )
-      .then((msg) => console.log(msg))
-      .catch((err) => console.error(err));
+    ).catch((err) => console.error(err));
   };
 
   render() {
