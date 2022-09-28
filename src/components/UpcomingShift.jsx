@@ -31,19 +31,24 @@ function UpcomingShift({ events }) {
         let comingShift = new Date(9999999999999); // in the year 2286...
         events.forEach((event) => {
           let isAssigned = false;
-          event.shiftVolunteers.forEach((volunteer) => {
-            if (!isEmpty(volunteer)) {
-              if (volunteer.id == user.uid) isAssigned = true;
-            }
-          });
+          if (event.start > new Date()) {
+            event.shiftVolunteers.forEach((volunteer) => {
+              if (!isEmpty(volunteer)) {
+                if (volunteer.id == user.uid) isAssigned = true;
+              }
+            });
+          }
           if (isAssigned) {
+            console.log(event.start, comingShift);
             if (event.start < comingShift) {
               comingShift = event.start;
               comingEvent = event;
             }
           }
         });
-        if (comingEvent.start > new Date()) setNextShift(comingEvent);
+        if (comingEvent.start > new Date()) {
+          setNextShift(comingEvent);
+        }
       }
     };
 
