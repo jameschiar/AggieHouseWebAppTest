@@ -97,6 +97,15 @@ td {
   margin-top: 7.5px;
 }
 
+.change-date {
+  width: 30px;
+  height: 30px;
+  border: none;
+  background-color: #e8e2dc;
+  font-weight: bolder;
+  font-size: large;
+}
+
 @media only screen and (max-width: 768px) {
   .attendance-sheet {
     width: 800px;
@@ -104,6 +113,6 @@ td {
   }
 
   .submission {
-    justify-content: start;
+    width: 785px;
   }
 }

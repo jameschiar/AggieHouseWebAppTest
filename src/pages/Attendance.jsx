@@ -115,8 +115,7 @@ function Attendance() {
   };
 
   // change the attendance table to chosen date
-  const changeDate = async (e) => {
-    e.preventDefault();
+  const changeDate = async (newDate) => {
     let submittedDate = new Date(
       newDate.replace(/-/g, "/")
     ).toLocaleDateString();
@@ -139,12 +138,33 @@ function Attendance() {
     }
   };
 
+  // change date to previous date
+  const decrementDate = async () => {
+    let prevDate = new Date(date.replace(/-/g, "/"));
+    prevDate.setDate(prevDate.getDate() - 1);
+    prevDate = prevDate.toLocaleDateString();
+    await changeDate(prevDate);
+  };
+
+  // change date to next date
+  const incrementDate = async () => {
+    let nextDate = new Date(date.replace(/-/g, "/"));
+    nextDate.setDate(nextDate.getDate() + 1);
+    nextDate = nextDate.toLocaleDateString();
+    await changeDate(nextDate);
+  };
+
   return (
     <div>
       <NavBar />
       {!isBusy && (
         <>
-          <form onSubmit={changeDate}>
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              changeDate(newDate);
+            }}
+          >
             <label htmlFor="date-picker" style={{ margin: "10px" }}>
               View past attendance:{" "}
             </label>
@@ -160,7 +180,27 @@ function Attendance() {
             <input className="submitDate" type="submit" />
           </form>
           <div>
-            <h2 style={{ marginLeft: "30px", color: "#545454" }}>{date}</h2>
+            <div style={{ display: "flex", alignItems: "center" }}>
+              <button
+                className="change-date"
+                style={{ marginLeft: "30px" }}
+                onClick={decrementDate}
+              >
+                &lt;
+              </button>
+              <span
+                style={{
+                  fontWeight: "bold",
+                  fontSize: "25px",
+                  color: "#545454",
+                }}
+              >
+                {date}
+              </span>
+              <button className="change-date" onClick={incrementDate}>
+                &gt;
+              </button>
+            </div>
             <AttendanceTable
               attendanceData={attendanceData}
               deleteState={deleteState}
