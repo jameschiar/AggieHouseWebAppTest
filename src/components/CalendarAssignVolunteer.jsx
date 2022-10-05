@@ -21,29 +21,6 @@ function CalendarAssignVolunteer({ selectedEvent, setSelectedEvent }) {
     );
   };
 
-  // custom styling for react-select
-  const customStyles = {
-    menu: (provided, state) => ({
-      ...provided,
-      width: state.selectProps.width,
-      borderBottom: "1px dotted pink",
-      color: state.selectProps.menuColor,
-      padding: 20,
-    }),
-    control: (provided, { selectProps: { width, height, fontSize } }) => ({
-      ...provided,
-      width: width,
-      height: height,
-    }),
-
-    singleValue: (provided, state) => {
-      const opacity = state.isDisabled ? 0.5 : 1;
-      const transition = "opacity 300ms";
-
-      return { ...provided, opacity, transition };
-    },
-  };
-
   // submit new assignment to 'events'
   const submitAssignment = async () => {
     if (isEmpty(newAssignment)) {
@@ -164,5 +141,28 @@ function CalendarAssignVolunteer({ selectedEvent, setSelectedEvent }) {
     </div>
   );
 }
+
+// custom styling for react-select
+const customStyles = {
+  menu: (provided, state) => ({
+    ...provided,
+    width: state.selectProps.width,
+    borderBottom: "1px dotted pink",
+    color: state.selectProps.menuColor,
+    padding: 20,
+  }),
+  control: (provided, { selectProps: { width, height, fontSize } }) => ({
+    ...provided,
+    width: width,
+    height: height,
+  }),
+
+  singleValue: (provided, state) => {
+    const opacity = state.isDisabled ? 0.5 : 1;
+    const transition = "opacity 300ms";
+
+    return { ...provided, opacity, transition };
+  },
+};
 
 export default CalendarAssignVolunteer;
