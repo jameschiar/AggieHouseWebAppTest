@@ -40,7 +40,7 @@ function requiresNotification(appointment, currentTime) {
             .diff(moment(currentLocalTime).utc())
         )
         .asMinutes()
-    ) === parseInt(appointment.notification || 30)
+    ) === parseInt(appointment.notification || 1440) // 1440 minutes is 1 day
   );
 }
 
