@@ -20,7 +20,7 @@ function SMSAll() {
 
       if (user.phoneNumber) {
         fetch(
-          `https://aggie-house-reminders.herokuapp.com/send-text?recipient=${user.phoneNumber}&textmessage=${smsObj.message}`
+          `https://aggiehousewebapptest-production.up.railway.app/send-text?recipient=${user.phoneNumber}&textmessage=${smsObj.message}`
         ).catch((err) => console.error(err));
       }
     });
