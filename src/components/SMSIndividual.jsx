@@ -22,9 +22,9 @@ function SMSIndividual() {
 
     fetch(
       `https://aggiehousewebapptest-production.up.railway.app/send-text?recipient=${smsObj.mobile_number}&textmessage=${smsObj.message}`
-    ).catch((err) => console.error(err));
-
-    alert("Text Sent");
+    )
+      .then(alert("text sent"))
+      .catch((err) => console.error(err));
   };
 
   const handleChange = (event) => {
